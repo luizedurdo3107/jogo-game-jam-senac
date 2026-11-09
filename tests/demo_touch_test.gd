@@ -1,0 +1,93 @@
+extends "res://tests/test_fixture.gd"
+
+func touch_event(index: int, action: String, pressed: bool) -> void:
+	var event := InputEventScreenTouch.new()
+	event.index = index
+	event.position = game.hud.touch.buttons[action].rect.get_center()
+	event.pressed = pressed
+	get_viewport().push_input(event,true)
+
+func run() -> void:
+	suite_name = "TOQUE 2.5D / EVENTOS SINTÉTICOS"
+	await open_demo()
+	game.hud.touch.set_manual_mode(1)
+	await frames(3)
+	verify(game.hud.touch.should_show(),"Ajuste manual mostra controles")
+	var start_x: float = game.player.position.x
+	touch_event(0,"move_right",true)
+	await frames(8)
+	verify(Input.is_action_pressed("move_right"),"Primeiro dedo mantém movimento")
+	touch_event(1,"jump",true)
+	await frames(9)
+	verify(Input.is_action_pressed("move_right") and Input.is_action_pressed("jump"),"Dois dedos independentes")
+	verify(game.player.position.x>start_x+0.5 and game.player.position.y>0.4,"Mover e saltar simultaneamente com toques")
+	touch_event(1,"jump",false)
+	await frames(1)
+	verify(not Input.is_action_pressed("jump") and Input.is_action_pressed("move_right"),"Soltar salto não solta movimento")
+	touch_event(0,"move_right",false)
+	await frames(65)
+	verify(not Input.is_action_pressed("move_right"),"Liberação não deixa movimento preso")
+	touch_event(2,"move_left",true)
+	touch_event(3,"move_left",true)
+	await frames(2)
+	touch_event(2,"move_left",false)
+	await frames(1)
+	verify(Input.is_action_pressed("move_left"),"Dois dedos na mesma ação mantêm referência")
+	var drag := InputEventScreenDrag.new()
+	drag.index = 3
+	drag.position = Vector2(400,200)
+	get_viewport().push_input(drag,true)
+	await frames(1)
+	verify(not Input.is_action_pressed("move_left"),"Arrastar para fora libera o botão")
+	touch_event(4,"move_right",true)
+	await frames(1)
+	game.hud.show_help()
+	verify(not Input.is_action_pressed("move_right"),"Modal libera toques ativos")
+	var modal_x: float = game.player.position.x
+	touch_event(5,"move_left",true)
+	await frames(10)
+	verify(is_equal_approx(game.player.position.x,modal_x),"Diálogo bloqueia movimentação por toque")
+	game.hud.close_modal()
+	game.player.position = Vector3(8,0.1,0)
+	await frames(15)
+	touch_event(6,"interact",true)
+	await frames(1)
+	verify(GameState.gaia_unlocked and game.hud.modal_open,"Botão AGIR abre interação real")
+	touch_event(6,"interact",false)
+	game.hud.close_modal()
+	touch_event(7,"perspective",true)
+	await frames(2)
+	verify(GameState.gaia_active and game.environment.circuit.visible,"Botão GAIA altera perspectiva real")
+	touch_event(7,"perspective",false)
+	game.hud.touch.set_manual_mode(2)
+	verify(not game.hud.touch.should_show(),"Ajuste manual oculta controles")
+	game.hud.touch.set_manual_mode(1)
+	touch_event(8,"move_left",true)
+	await frames(1)
+	game.hud.touch._notification(NOTIFICATION_APPLICATION_FOCUS_OUT)
+	verify(not Input.is_action_pressed("move_left"),"Perda de foco libera ações")
+	var resolutions := [DisplayServer.window_get_size()] if OS.has_feature("web") else [Vector2i(844,390),Vector2i(1280,720),Vector2i(390,844),Vector2i(960,540)]
+	for resolution in resolutions:
+		if not OS.has_feature("web"):
+			DisplayServer.window_set_size(resolution)
+			OS.delay_msec(80)
+		await frames(10)
+		game.hud.touch._layout()
+		var visible_rect := Rect2(Vector2.ZERO,game.hud.touch.size)
+		for definition in game.hud.touch.buttons.values():
+			verify(visible_rect.encloses(definition.rect),"Botão dentro da área lógica: "+str(resolution))
+		verify(game.hud.portrait.visible==(DisplayServer.window_get_size().y>DisplayServer.window_get_size().x),"Rotação oferece orientação correta")
+	game.queue_free()
+	await frames(3)
+	OS.delay_msec(60)
+	print("%s: %d verificações, %d falhas"%[suite_name,assertions,failures])
+	if OS.has_feature("recife_qa"):
+		var total := assertions+int(get_parent().get("assertions"))
+		var canvas := CanvasLayer.new()
+		add_child(canvas)
+		var result := SignalTheme.label("WEB QA CONCLUÍDO\n\n%d verificações de percurso e toque\n%d falhas\n\nWebGL 2 / Compatibility / sem threads\nToques sintéticos, não celular físico"%[total,failures],28,SignalTheme.TEAL)
+		result.position = Vector2(80,100)
+		canvas.add_child(result)
+		print("WEB QA CONCLUÍDO: %d verificações"%total)
+	else:
+		get_tree().quit(0 if failures==0 else 1)

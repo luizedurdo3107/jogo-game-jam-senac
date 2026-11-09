@@ -1,0 +1,23 @@
+{
+  "id":"air","title":"TORRE ATMOS / O AR QUE RESTA","width":26,"height":13,
+  "intro":"O porto aparece através da névoa. A técnica não libera a torre sem ar para os alojamentos. As etapas digitais estão em andares diferentes: recupere a circulação sem atacar os drones nem abandonar a equipe.",
+  "objects":[
+    {"id":"scan","at":[3,0],"mode":"gaia","kind":"digital","label":"DIAGNÓSTICO / PARTÍCULAS E DUTOS","command":"scan"},
+    {"id":"technician","at":[5,0],"mode":"physical","kind":"npc","label":"TÉCNICA DA NEXUS / DERIVAÇÃO DE AR","command":"technician"},
+    {"id":"install","at":[7,0],"mode":"physical","kind":"pump","label":"ARRANQUE / ELEVADOR","command":"install"},
+    {"id":"module","at":[13,0],"mode":"physical","kind":"battery","label":"DEPÓSITO / MÓDULO DE ARRANQUE","command":"module"},
+    {"id":"maintenance","at":[9.5,2.6],"mode":"gaia","kind":"digital","label":"MANUTENÇÃO REMOTA / DRONE","command":"maintenance"},
+    {"id":"carbon","at":[17,2.6],"mode":"gaia","kind":"digital","label":"ESTÁGIO 2 / CARVÃO ATIVADO","command":"carbon"},
+    {"id":"filter","at":[11,5.2],"mode":"physical","kind":"valve","label":"FILTRO MECÂNICO / ISOLAR–FILTRAR–BYPASS","command":"filter"},
+    {"id":"coarse","at":[15,5.2],"mode":"gaia","kind":"digital","label":"ESTÁGIO 1 / PRÉ-FILTRO","command":"coarse"},
+    {"id":"memory","at":[20,5.2],"mode":"gaia","kind":"memory","label":"MEMÓRIA / FLUXO ATMOS 2112","command":"memory"},
+    {"id":"turbine","at":[15,7.8],"mode":"gaia","kind":"digital","label":"ESTÁGIO 3 / TURBINA","command":"turbine"},
+    {"id":"door","at":[19,7.8],"mode":"physical","kind":"door","label":"ABRIR CABINE / CIRCULAÇÃO DE AR","command":"door"},
+    {"id":"decision","at":[22,7.8],"mode":"physical","kind":"decision","label":"AR / DESTINO DO NÚCLEO"},
+    {"id":"exit","at":[24,7.8],"mode":"physical","kind":"exit","label":"PORTO NEXUS / ARCA-01"},
+    {"id":"lift_ground","at":[8,0],"mode":"physical","kind":"lift","label":"ELEVADOR / TÉRREO"},
+    {"id":"lift_one","at":[8,2.6],"mode":"physical","kind":"lift","label":"ELEVADOR / ANDAR 1"},
+    {"id":"lift_two","at":[8,5.2],"mode":"physical","kind":"lift","label":"ELEVADOR / ANDAR 2"},
+    {"id":"lift_top","at":[8,7.8],"mode":"physical","kind":"lift","label":"ELEVADOR / ANDAR 3"}
+  ]
+}

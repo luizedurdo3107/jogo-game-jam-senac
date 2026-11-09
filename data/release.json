@@ -1,0 +1,8 @@
+{
+  "name": "LAST SIGNAL: EARTH_404",
+  "version": "1.0.0",
+  "engine": "Godot 4.7.2",
+  "repository": "https://github.com/luizedurdo3107/jogo-game-jam-senac",
+  "contents": ["jornada unificada 2.5D", "Recife Antigo", "Capibaribe", "Banco Verde", "Torre Atmos", "NEXUS 2.5D", "dois finais 2.5D", "controles mobile", "79 recursos sonoros originais"],
+  "limitations": ["música final e dublagem humana pendentes", "sprites originais sem ciclos dedicados adicionais", "validação em celulares físicos Android/iOS pendente", "Nova Éden e laboratório não são fases 3D independentes nesta edição"]
+}

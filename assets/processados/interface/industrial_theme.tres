@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3]
+[sub_resource type="SystemFont" id="Mono"]
+font_names = PackedStringArray("DejaVu Sans Mono", "Consolas", "Liberation Mono")
+allow_system_fallback = true
+[resource]
+resource_name = "LastSignal_Industrial"
+default_font = SubResource("Mono")
+default_font_size = 17
+Label/colors/font_color = Color(0.89,0.87,0.83,1)
+Button/colors/font_color = Color(0.89,0.87,0.83,1)

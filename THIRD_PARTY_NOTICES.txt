@@ -1,0 +1,17 @@
+LAST SIGNAL: EARTH_404 — versão 1.0.0
+
+Godot Engine: licença MIT. Veja LICENSES/GODOT_MIT.txt.
+Bibliotecas incorporadas pelo Godot: veja LICENSES/GODOT_THIRD_PARTY.txt.
+Informações: https://godotengine.org/license/
+
+O personagem, o vídeo original e as referências visuais foram fornecidos pelo
+responsável pelo projeto. Seus direitos e condições de uso não são substituídos
+pela licença do motor ou pela licença dos sons novos.
+
+Áudio novo: sound design procedural original para este projeto, não gravações
+de campo nem falas humanas. Pode ser usado, modificado e distribuído no jogo e
+derivados, inclusive comercialmente, sem atribuição obrigatória. Sem garantia
+de adequação ou exclusividade. Veja assets/audio/ORIGEM_E_LICENCA.md no projeto.
+
+Não há TTS. Música instrumental final e gravações humanas autorizadas não
+integram esta edição. Não foram incorporadas músicas de terceiros.

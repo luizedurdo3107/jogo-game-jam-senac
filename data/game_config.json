@@ -1,0 +1,5 @@
+{
+  "player_name": "Kairo",
+  "protagonist_asset_status": "Personagem original do vídeo fornecido pelo usuário, com oito quadros preservados",
+  "perspective": "2.5D com CharacterBody3D, AnimatedSprite3D e controles mobile"
+}

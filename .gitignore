@@ -1,0 +1,16 @@
+.godot/
+work/
+*.tmp
+*.bak
+export.cfg
+export_credentials.cfg
+outputs/web/
+outputs/linux/
+outputs/windows/
+outputs/*.import
+dist/
+.env
+.env.*
+!.env.example
+.sites-checkout/
+.sites-runtime/

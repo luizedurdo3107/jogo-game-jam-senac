@@ -1,0 +1,591 @@
+{
+	"amb_air": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_air.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"amb_air_after": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_air_after.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"amb_lab": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_lab.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"amb_nexus": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_nexus.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"amb_nova": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_nova.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"amb_recife": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_recife.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"amb_recife_after": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_recife_after.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"amb_soil": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_soil.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"amb_soil_after": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_soil_after.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"amb_water": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_water.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"amb_water_after": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/amb_water_after.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 24.0
+	},
+	"archive": {
+		"bus": "UI",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/archive.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 1.15
+	},
+	"capsule": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/capsule.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 1.2
+	},
+	"circuit": {
+		"bus": "UI",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/circuit_01.wav",
+			"res://assets/audio/sfx/circuit_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.3
+	},
+	"door": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/door_01.wav",
+			"res://assets/audio/sfx/door_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 1.1
+	},
+	"drone_alert": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/drone_alert.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.8
+	},
+	"drone_rotor": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -8.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/sfx/drone_rotor.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 12.0
+	},
+	"fan_rough": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -8.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/sfx/fan_rough.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 12.0
+	},
+	"fan_start": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/fan_start.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 1.5
+	},
+	"fan_steady": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -8.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/sfx/fan_steady.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 12.0
+	},
+	"gaia_layer": {
+		"bus": "Ambience",
+		"cooldown": 0.05,
+		"gain_db": -2.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/ambience/gaia_layer.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 12.0
+	},
+	"gaia_switch": {
+		"bus": "UI",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/gaia_switch_01.wav",
+			"res://assets/audio/sfx/gaia_switch_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.75
+	},
+	"gate": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/gate.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 2.1
+	},
+	"install": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/install_01.wav",
+			"res://assets/audio/sfx/install_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.6
+	},
+	"irrigation": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -8.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/sfx/irrigation.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 12.0
+	},
+	"irrigation_start": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/irrigation_start.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 1.1
+	},
+	"jump": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/jump_01.wav",
+			"res://assets/audio/sfx/jump_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.32
+	},
+	"ladder": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/ladder_01.wav",
+			"res://assets/audio/sfx/ladder_02.wav",
+			"res://assets/audio/sfx/ladder_03.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.28
+	},
+	"land_concrete": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/land_concrete_01.wav",
+			"res://assets/audio/sfx/land_concrete_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.62
+	},
+	"land_metal": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/land_metal_01.wav",
+			"res://assets/audio/sfx/land_metal_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.62
+	},
+	"land_wet": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/land_wet_01.wav",
+			"res://assets/audio/sfx/land_wet_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.62
+	},
+	"lift_motor": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -8.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/sfx/lift_motor.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 12.0
+	},
+	"lift_start": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/lift_start.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.7
+	},
+	"lift_stop": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/lift_stop.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.7
+	},
+	"object_move": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/object_move_01.wav",
+			"res://assets/audio/sfx/object_move_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.65
+	},
+	"pickup": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/pickup_01.wav",
+			"res://assets/audio/sfx/pickup_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.48
+	},
+	"power_restore": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/power_restore.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 1.65
+	},
+	"pressure": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/pressure_01.wav",
+			"res://assets/audio/sfx/pressure_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 1.45
+	},
+	"pump_rough": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -8.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/sfx/pump_rough.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 12.0
+	},
+	"pump_start": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/pump_start.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 1.5
+	},
+	"pump_steady": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -8.0,
+		"loop": true,
+		"paths": [
+			"res://assets/audio/sfx/pump_steady.ogg"
+		],
+		"pitch_variation": 0.0,
+		"seconds": 12.0
+	},
+	"reserve": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/reserve.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 1.8
+	},
+	"scan": {
+		"bus": "UI",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/scan_01.wav",
+			"res://assets/audio/sfx/scan_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.65
+	},
+	"step_concrete": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -5.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/step_concrete_01.wav",
+			"res://assets/audio/sfx/step_concrete_02.wav",
+			"res://assets/audio/sfx/step_concrete_03.wav",
+			"res://assets/audio/sfx/step_concrete_04.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.38
+	},
+	"step_metal": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -5.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/step_metal_01.wav",
+			"res://assets/audio/sfx/step_metal_02.wav",
+			"res://assets/audio/sfx/step_metal_03.wav",
+			"res://assets/audio/sfx/step_metal_04.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.38
+	},
+	"step_wet": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -5.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/step_wet_01.wav",
+			"res://assets/audio/sfx/step_wet_02.wav",
+			"res://assets/audio/sfx/step_wet_03.wav",
+			"res://assets/audio/sfx/step_wet_04.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.38
+	},
+	"ui_cancel": {
+		"bus": "UI",
+		"cooldown": 0.12,
+		"gain_db": -8.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/ui/ui_cancel_01.wav",
+			"res://assets/audio/ui/ui_cancel_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.17
+	},
+	"ui_confirm": {
+		"bus": "UI",
+		"cooldown": 0.12,
+		"gain_db": -8.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/ui/ui_confirm_01.wav",
+			"res://assets/audio/ui/ui_confirm_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.17
+	},
+	"ui_hover": {
+		"bus": "UI",
+		"cooldown": 0.12,
+		"gain_db": -8.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/ui/ui_hover_01.wav",
+			"res://assets/audio/ui/ui_hover_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.08
+	},
+	"ui_notify": {
+		"bus": "UI",
+		"cooldown": 0.12,
+		"gain_db": -8.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/ui/ui_notify_01.wav",
+			"res://assets/audio/ui/ui_notify_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.17
+	},
+	"valve": {
+		"bus": "SFX",
+		"cooldown": 0.05,
+		"gain_db": -3.0,
+		"loop": false,
+		"paths": [
+			"res://assets/audio/sfx/valve_01.wav",
+			"res://assets/audio/sfx/valve_02.wav"
+		],
+		"pitch_variation": 0.025,
+		"seconds": 0.85
+	}
+}

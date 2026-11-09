@@ -1,0 +1,54 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="LAST SIGNAL: EARTH_404"
+config/version="1.0.0"
+config/description="Uma aventura sobre cuidado, memória e o futuro do Recife."
+run/main_scene="res://scenes/ui/main_menu.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[autoload]
+
+GameState="*res://scripts/core/session_state.gd"
+SceneRouter="*res://scripts/core/scene_router.gd"
+StationJourney="*res://scripts/core/journey.gd"
+AudioDirector="*res://scripts/audio/audio_director.gd"
+
+[audio]
+
+buses/default_bus_layout="res://default_bus_layout.tres"
+general/default_playback_type.web=0
+
+[display]
+
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=0
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.067, 0.063, 0.102, 1)

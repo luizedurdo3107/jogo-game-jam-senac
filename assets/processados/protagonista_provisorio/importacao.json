@@ -1,0 +1,19 @@
+{
+	"alignment": "common crop and integer vertical foot alignment; no resampling",
+	"animation_limit": "short source motion reused for idle and walk; no independent walk cycle supplied",
+	"background_method": "near-black flood fill connected to image border; enclosed dark details preserved",
+	"background_threshold_rgb": 14,
+	"baseline_source_y": 288,
+	"crop_x": 145,
+	"crop_y": 76,
+	"duration_seconds": 0.8,
+	"fps": 10,
+	"frame_height": 216,
+	"frame_width": 83,
+	"frames": 8,
+	"padding": 4,
+	"source": "res://assets/originais/protagonista_provisorio/WhatsApp Video 2026-11-06 at 14.16.40.mp4",
+	"source_height": 368,
+	"source_sha256": "a1e0cc3a18acfb111e8c0288ad3100c29076b31c6ac3a5fed39999ff75df8b59",
+	"source_width": 368
+}
