@@ -10,7 +10,7 @@ var gaia_unlocked := false
 var gaia_active := false
 var flags: Dictionary = {}
 var values: Dictionary = {}
-var station_choices: Dictionary = {"water": "PENDING", "soil": "PENDING", "air": "PENDING"}
+var station_choices: Dictionary = {"water": "PENDING"}
 var inventory: Array = []
 var input_locked := false
 var volume := 0.45
@@ -41,7 +41,7 @@ func reset() -> void:
 	flags.clear()
 	values.clear()
 	inventory.clear()
-	station_choices = {"water":"PENDING","soil":"PENDING","air":"PENDING"}
+	station_choices = {"water":"PENDING"}
 	input_locked = false
 	changed.emit()
 

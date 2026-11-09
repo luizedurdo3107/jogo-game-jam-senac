@@ -2,7 +2,6 @@ extends "res://scripts/ui/game_hud.gd"
 
 var diagnostic_panel: PanelContainer
 var diagnostic_text: Label
-var selection := 0
 
 func _ready() -> void:
 	super._ready()
@@ -27,14 +26,14 @@ func _process(delta: float) -> void:
 
 func refresh() -> void:
 	super.refresh()
-	perspective.text = ("[G] GAIA / " if GameState.gaia_active else "[F] CORPO / ")+{"water":"CAPIBARIBE","soil":"BANCO VERDE","air":"ATMOS"}[world.station_id]
+	perspective.text = ("[G] GAIA / " if GameState.gaia_active else "[F] CORPO / ")+"CAPIBARIBE / ÚLTIMO SINAL"
 
 func show_help() -> void:
 	_clear_modal("CORPO + CAMADA DIGITAL",world.system.objective()+"\n\nQ: perspectiva · E: interagir · A/D: mover\nEspaço: salto · W/S: escadas.\nGAIA seleciona redes e comandos remotos. O corpo carrega módulos, conversa e move mecanismos. Memórias são arquivos, nunca viagens no tempo.")
 	button(modal_box,"Continuar",close_modal).grab_focus()
 
 func show_pause() -> void:
-	_clear_modal("ESTAÇÕES / PAUSA","Progresso técnico, escolhas e checkpoints são salvos neste dispositivo.")
+	_clear_modal("CAPIBARIBE / PAUSA","Progresso técnico, escolhas e checkpoints são salvos neste dispositivo.")
 	var row := HBoxContainer.new()
 	modal_box.add_child(row)
 	button(row,"Continuar",close_modal).grab_focus()
@@ -57,29 +56,7 @@ func show_system_panel(panel_id: String) -> void:
 				var names := ["A / Esgoto industrial · contaminação 92%","B / Filtro comunitário · regime 60 kPa","C / Bypass ARCA · sem tratamento local"]
 				var channel := button(modal_box,names[index],func(): _apply(panel_id,index))
 				if index==world.journey.value("water_route"):channel.grab_focus()
-		"soil_capsules":
-			selection = world.journey.value("soil_mask")
-			_clear_modal("GAIA / VIABILIDADE DAS SEMENTES","Escolha apenas duas cápsulas viáveis. Condições de germinação: umidade 45% e temperatura 24°C.")
-			var grid := GridContainer.new()
-			grid.columns = 2
-			modal_box.add_child(grid)
-			var labels := ["A / 85% contaminada","B / viabilidade 92%","C / membrana rompida","D / viabilidade 88%"]
-			for index in range(4):
-				var capsule := button(grid,labels[index],func(): _toggle_capsule(index),Vector2(315,58))
-				capsule.toggle_mode = true
-				capsule.button_pressed = (selection&(1<<index))!=0
-				capsule.add_theme_font_size_override("font_size",15)
-				if index==0:capsule.grab_focus()
-			button(modal_box,"Aplicar rede às cápsulas selecionadas",func(): _apply("soil_capsules",selection),Vector2(0,56))
-		"soil_temperature":
-			_clear_modal("GAIA / CONTROLE REMOTO TÉRMICO","Somente o circuito digital controla a temperatura. As cápsulas viáveis exigem 24°C.")
-			for index in range(3):
-				var temperature := button(modal_box,["18°C / repouso","24°C / germinação","35°C / estresse"][index],func(): _apply(panel_id,index),Vector2(0,56))
-				if index==0:temperature.grab_focus()
 	button(modal_box,"Cancelar / voltar",close_modal,Vector2(0,56))
-
-func _toggle_capsule(index: int) -> void:
-	selection ^= 1<<index
 
 func _apply(panel: String, argument: int) -> void:
 	var result: Dictionary = world.configure_system(panel,argument)
@@ -97,13 +74,12 @@ func show_decision() -> void:
 			world.finish(choice))
 		if modal_box.get_child_count()==3:destination.grab_focus()
 
-func show_technician() -> void:
-	var story: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/story/dialogue.json"))
-	var dialogue: Dictionary = story.air_technician
-	_clear_modal(str(dialogue.speaker),str(dialogue.lines[0]))
-	for index in range(dialogue.choices.size()):
-		var reply := button(modal_box,str(dialogue.choices[index].text),func():
-			var result: Dictionary = world.configure_system("air_team",index)
-			close_modal()
-			notify(result.message))
-		if index==0:reply.grab_focus()
+func show_signal_summary() -> void:
+	var restored: bool = world.journey.choices.water=="RESTORE"
+	var consequence := "O núcleo permanece no Recife. A água sustentará as casas; {player} e Lyra ficam com a comunidade." if restored else "O núcleo alimentará os reservatórios da ARCA-01. {player} e Lyra poderão partir, mas o Recife ainda precisa de água."
+	_clear_modal("O ÚLTIMO SINAL",consequence.replace("{player}",GameState.player_name)+"\n\nEsta é a conclusão da jornada. Transmita para ver o desfecho da sua escolha.")
+	button(modal_box,"Transmitir e ver o final",func():
+		touch.release_all()
+		if not world.journey.complete_signal():
+			notify("Não foi possível concluir o salvamento. Verifique o armazenamento e tente novamente.")).grab_focus()
+	button(modal_box,"Voltar e conferir",close_modal)

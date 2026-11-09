@@ -1,4 +1,4 @@
-# Validação da consolidação 2.5D/mobile
+# Validação da campanha curta 2.5D/mobile
 
 Ambiente: Godot 4.7.2 Flathub, Compatibility, Intel Iris Xe/Mesa. Web: Chromium do navegador integrado, WebGL 2, viewport 844×390. Não é um celular físico.
 
@@ -14,14 +14,14 @@ Os nomes `demo_physics_test` e `demo_touch_test` são nomes históricos dos test
 
 | Suíte | Verificações | Escopo |
 |---|---:|---|
-| journey_test | 924 | percurso real do Recife e NEXUS, oito combinações, dois finais 3D, validação/migração/round-trip de saves, catálogo sonoro |
-| flow_test | 51 | mudanças reais entre todas as regiões, final e menu |
-| stations_test | 163 | resolução por movimento/escadas/elevador dos três puzzles ambientais |
-| station_interaction_test | 38 | botões de configuração, modais, materiais GAIA e recuperação de erros |
+| journey_test | 366 | percurso real do Recife, duas decisões finais, migração v1/v2 → v3, round-trip, falha de gravação e catálogo sonoro |
+| flow_test | 60 | Recife → Capibaribe → final → menu para ambos os desfechos, cancelamento e Continue após conclusão |
+| stations_test | 138 | puzzle Capibaribe por deslocamento real, escadas e chegada ao transmissor para ambas as escolhas |
+| station_interaction_test | 28 | botões de configuração e conclusão, foco, modais, materiais GAIA e recuperação de autorização |
 | demo_physics_test | 30 | colisões, salto, elevador, pausa, drone pacífico e áudio local |
 | demo_touch_test | 46 | eventos sintéticos, dois dedos simultâneos, arraste, foco, rotação e disposição dos botões |
 
-Resultado: **1.252 verificações, zero falhas**. Arquivos de execução consolidados em `outputs/VALIDACAO_MOBILE.log`.
+Resultado: **668 verificações, zero falhas**. Arquivos de execução consolidados em `outputs/VALIDACAO_CAMPANHA_CURTA.log`.
 
 ## Capturas reais
 
@@ -29,17 +29,19 @@ Resultado: **1.252 verificações, zero falhas**. Arquivos de execução consoli
 godot --path . --fixed-fps 60 res://tests/mobile_capture.tscn
 ```
 
-Grava menu, Recife, NEXUS físico/digital e epílogo em `outputs/`. O utilitário prepara estados de teste sem alterar o save do jogador. O resultado não constitui teste de hardware mobile.
+Grava menu, Recife, confirmação do transmissor e os dois desfechos em `outputs/`. O utilitário prepara estados de teste sem alterar o save do jogador. O resultado não constitui teste de hardware mobile.
 
 ## Exportação
 
-Único preset de distribuição: `Web Mobile`. O arquivo `project.godot` aponta somente para o menu unificado, sem overrides para versões antigas. Os seis cenários de jogo são Node3D; interfaces são Control/CanvasLayer.
+Único preset de distribuição: `Web Mobile`. O arquivo `project.godot` aponta somente para o menu unificado, sem overrides para versões antigas. Os três cenários de jogo (duas fases + epílogo) são Node3D; interfaces são Control/CanvasLayer.
 
-Exportação Web release concluída. No navegador integrado, o menu iniciou a jornada, os controles virtuais foram ativados pela pausa, o retorno em paisagem e o bloqueio em retrato foram conferidos. O build final foi aberto novamente em 844×390; console sem erros/avisos em `outputs/MOBILE_WEB_CONSOLE.json`. Isso não substitui a execução completa em celulares físicos.
+A exportação `Web Mobile` foi refeita com a campanha curta, substituindo o PCK anterior em `outputs/web/`. A validação visual atual usa a Godot nativa e os mesmos controles mobile. Os testes completos de percurso e transição são automatizados; não constituem uma sessão integral em celular físico.
 
-Também foi reconstruída uma cópia limpa dos arquivos preparados para o commit, sem `.godot/`, backups ou exports anteriores: importação e as 51 verificações de fluxo passaram novamente.
+Uma cópia limpa dos arquivos preparados para o commit também foi importada sem cache ou backups; as 60 verificações de fluxo entre cenas passaram nela. Os hashes da exportação local estão em `outputs/BUILD_WEB.sha256`.
 
-Os testes não escrevem no save normal. Os testes de persistência usam caminho aleatório e removem apenas o arquivo temporário que criaram. Preferências de toque não são gravadas pelos testes sintéticos. A migração da campanha 2D não é suportada; somente o antigo save 2.5D das estações é importado.
+As alterações locais preexistentes de `project.godot` e `default_bus_layout.tres` são preservadas, sem inclusão no commit desta tarefa.
+
+Os testes não escrevem no save normal. Os testes de persistência usam caminho aleatório e removem apenas o arquivo temporário que criaram. Preferências de toque não são gravadas pelos testes sintéticos. A migração dos saves 2.5D v1/v2 é testada em diferentes fases e preserva somente o progresso pertinente ao Recife/Capibaribe. Os arquivos antigos não são sobrescritos; a confirmação final precisa ser feita na campanha curta. Saves inconsistentes são rejeitados.
 
 ## Checklist em celulares físicos (pendente)
 
@@ -48,7 +50,7 @@ Os testes não escrevem no save normal. Os testes de persistência usam caminho 
 3. Interagir, rolar diálogos e resolver os puzzles sem teclado.
 4. Girar para retrato e retornar à paisagem: nenhuma ação deve ficar presa.
 5. Minimizar/reabrir, pausar, ajustar seis volumes e recarregar.
-6. Confirmar Continue, checkpoints, três decisões e ambos os finais.
+6. Confirmar Continue, checkpoints, a escolha da água, confirmação e ambos os finais.
 7. Avaliar recortes/notch, texto, áudio após gesto e estabilidade durante toda a jornada.
 8. Medir FPS/consumo no aparelho; a meta de 30 FPS ainda não está certificada.
 

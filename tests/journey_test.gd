@@ -1,127 +1,119 @@
 extends "res://tests/stations_test.gd"
 
-func seed_choices(mask: int) -> void:
+func seed_water(choice := "RESTORE") -> void:
 	StationJourney.reset()
 	StationJourney.stage = "stations"
-	for region in StationJourney.ORDER:
-		var system: RefCounted = load("res://scripts/puzzles/%s_system.gd"%region).new()
-		system.journey = StationJourney
-		var commands: Array
-		match region:
-			"water":
-				system.configure("water_route",1)
-				commands = ["drain","module","install","valve_a","valve_a","valve_b","valve_b","authorize","pump","door"]
-			"soil":
-				system.configure("soil_capsules",10)
-				system.configure("soil_temperature",1)
-				commands = ["filter","install","humidity","authorize","irrigate","door"]
-			_:
-				commands = ["scan","module","install"]
-		for command in commands:verify(system.interact(command).ok,"Preparação válida: "+region+"/"+command)
-		if region=="air":
-			system.configure("air_team",0)
-			for command in ["coarse","carbon","turbine","filter","door"]:
-				verify(system.interact(command).ok,"Preparação Atmos: "+command)
-		StationJourney.station = region
-		verify(StationJourney.decide("RESTORE" if mask&(1<<StationJourney.ORDER.find(region)) else "EXODUS"),"Decisão aceita: "+region)
-		verify(not StationJourney.decide("RESTORE"),"Decisão não pode ser duplicada")
-	StationJourney.stage = "nexus"
+	var system := preload("res://scripts/puzzles/water_system.gd").new()
+	system.journey = StationJourney
+	system.configure("water_route",1)
+	for command in ["drain","module","install","valve_a","valve_a","valve_b","valve_b","authorize","pump","door"]:
+		verify(system.interact(command).ok,"Preparação válida: "+command)
+	verify(StationJourney.decide(choice),"Decisão aceita: "+choice)
+
+func legacy_snapshot(version: int, destination: String, choice: String) -> Dictionary:
+	var data := {"version":version,"station":"water","stage":"stations","values":{"water_route":1,"water_drained":1,"water_module":2,"water_a":2,"water_b":2,"water_authorized":1,"water_pump":1,"water_open":1},"choices":{"water":choice,"soil":"PENDING","air":"PENDING"},"checkpoints":{"water":[31.0,0.05]}}
+	if destination=="intro":
+		data.stage = "intro"
+		data.choices.water = "PENDING"
+		data.values = {"recife_awake":1}
+		data.checkpoints = {"recife":[8.0,0.05]}
+	elif destination in ["soil","air","nexus","ending"]:
+		data.station = "soil" if destination=="soil" else "air"
+		data.choices.soil = "RESTORE"
+		data.values.merge({"soil_filter":2,"soil_mask":10,"soil_humidity":1,"soil_temperature":1,"soil_authorized":1,"soil_irrigation":1,"soil_open":1})
+		if destination in ["air","nexus","ending"]:
+			data.choices.air = "EXODUS"
+			data.values.merge({"air_scan":1,"air_module":2,"air_team":1,"air_sequence":3,"air_filter":1,"air_open":1})
+			data.checkpoints.air = [22.0,7.8]
+		if destination in ["nexus","ending"]:data.stage = destination
+		if destination=="ending":
+			data.values.merge({"nexus_voss":1,"nexus_scan":1,"nexus_locks":1,"nexus_authorized":1,"nexus_open":1,"nexus_confirmed":1})
+	return data
 
 func persistence_checks() -> void:
-	for mask in range(8):
-		seed_choices(mask)
+	StationJourney.persistence_enabled = false
+	for choice in ["RESTORE","EXODUS"]:
+		seed_water(choice)
 		var snapshot := StationJourney.snapshot()
-		verify(StationJourney.validate(snapshot),"Snapshot válido: combinação "+str(mask))
-		var restores := StationJourney.choices.values().count("RESTORE")
-		verify(StationJourney.ending()==("ending_a" if restores>=2 else "ending_b"),"Maioria correta: "+str(mask))
+		verify(StationJourney.validate(snapshot),"Snapshot v3 válido")
 		for key in StationJourney.LIMITS:
 			var corrupt := snapshot.duplicate(true)
 			corrupt.values[key] = StationJourney.LIMITS[key]+1
 			verify(not StationJourney.validate(corrupt),"Limite rejeitado: "+key)
 		for invalid in [-1,0.5,"1",null]:
 			var corrupt := snapshot.duplicate(true)
-			corrupt.values.nexus_scan = invalid
-			verify(not StationJourney.validate(corrupt),"Tipo/valor inválido rejeitado")
-		var broken := snapshot.duplicate(true)
-		broken.values.nexus_open = 1
-		verify(not StationJourney.validate(broken),"Painel não abre sem validação")
+			corrupt.values.water_route = invalid
+			verify(not StationJourney.validate(corrupt),"Valor/campo inválido rejeitado")
+		for removed in ["soil","air","nexus"]:
+			var corrupt := snapshot.duplicate(true)
+			corrupt.station = removed
+			verify(not StationJourney.validate(corrupt),"Fase removida não pode voltar pelo save")
 		var injected := snapshot.duplicate(true)
 		injected.choices.extra = "RESTORE"
-		verify(not StationJourney.validate(injected),"Escolha extra não altera a maioria")
+		verify(not StationJourney.validate(injected),"Decisão extra rejeitada")
+		verify(not StationJourney.decide("EXODUS"),"Destino confirmado não é reescrito")
 		StationJourney.persistence_enabled = true
-		verify(StationJourney.save_game(),"Save atômico: "+str(mask))
+		verify(StationJourney.save_game(),"Save atômico v3")
 		StationJourney.reset()
-		verify(StationJourney.load_game(),"Leitura do save: "+str(mask))
-		verify(StationJourney.snapshot()==snapshot,"Round-trip preserva escolhas e técnica")
-		var legacy := snapshot.duplicate(true)
-		legacy.version = 1
-		var file := FileAccess.open(StationJourney.save_path,FileAccess.WRITE)
-		file.store_string(JSON.stringify(legacy))
-		file.close()
-		verify(StationJourney.load_game() and StationJourney.snapshot().version==2,"Migração v1 para v2 sem fluxo 2D")
+		verify(StationJourney.load_game() and StationJourney.snapshot()==snapshot,"Round-trip da decisão")
+		verify(StationJourney.complete_signal(),"Transmissão chega ao final sem outras fases")
+		var ending_snapshot := StationJourney.snapshot()
+		verify(StationJourney.validate(ending_snapshot),"Final persistível")
+		StationJourney.reset()
+		verify(StationJourney.load_game() and StationJourney.snapshot()==ending_snapshot,"Continue preserva o final")
+		verify(not StationJourney.complete_signal(),"Final não pode ser transmitido em duplicidade")
 		StationJourney.persistence_enabled = false
+	for version in [1,2]:
+		for destination in ["intro","water","soil","air","nexus","ending"]:
+			if version==1 and destination in ["intro","ending"]:continue
+			for choice in ["RESTORE","EXODUS"]:
+				var previous := legacy_snapshot(version,destination,choice)
+				var bytes_before := JSON.stringify(previous)
+				var converted := StationJourney.migrate(previous)
+				verify(not converted.is_empty() and StationJourney.validate(converted),"Migração v%d / %s / %s"%[version,destination,choice])
+				verify(JSON.stringify(previous)==bytes_before,"Migração não modifica o save original")
+				verify(converted.stage==("intro" if destination=="intro" else "stations"),"Migração não exige fase removida nem transmite sem confirmação")
+				verify(converted.choices.water==("PENDING" if destination=="intro" else choice),"Migração mantém o destino da água")
+				verify(not converted.checkpoints.has("air") and not converted.values.has("air_open"),"Progresso removido não contamina a campanha curta")
+	var invalid_legacy := legacy_snapshot(2,"water","RESTORE")
+	invalid_legacy.values.water_pump = 0
+	verify(StationJourney.migrate(invalid_legacy).is_empty(),"Save antigo inconsistente não é importado")
+	var source_path := StationJourney.save_path+".legacy"
+	var source := FileAccess.open(source_path,FileAccess.WRITE)
+	var original := JSON.stringify(legacy_snapshot(2,"nexus","EXODUS"))
+	source.store_string(original)
+	source.close()
+	var destination_path := StationJourney.save_path
+	StationJourney.save_path = source_path
+	verify(StationJourney.load_game(),"Leitura do arquivo antigo migra para duas fases")
+	verify(FileAccess.get_file_as_string(source_path)==original,"Leitura não sobrescreve o arquivo antigo")
+	StationJourney.save_path = destination_path
+	StationJourney.persistence_enabled = true
+	verify(StationJourney.save_game(),"Estado importado pode ser salvo no novo arquivo")
+	verify(FileAccess.get_file_as_string(source_path)==original,"Novo save mantém o arquivo antigo intacto")
+	var safe_path := StationJourney.save_path
+	StationJourney.save_path = "user://missing_"+Crypto.new().generate_random_bytes(8).hex_encode()+"/save.json"
+	verify(not StationJourney.complete_signal() and StationJourney.stage=="stations" and StationJourney.value("signal_sent")==0,"Falha de gravação não perde o final nem marca transmissão falsa")
+	StationJourney.save_path = safe_path
+	StationJourney.persistence_enabled = false
 	var corrupt_file := FileAccess.open(StationJourney.save_path,FileAccess.WRITE)
 	corrupt_file.store_string("{invalid")
 	corrupt_file.close()
 	verify(not StationJourney.load_game(),"Save corrompido rejeitado")
+	DirAccess.remove_absolute(source_path)
 	DirAccess.remove_absolute(StationJourney.save_path)
-
-func nexus_route() -> void:
-	seed_choices(7)
-	await open_station("nexus")
-	StationJourney.stage = "nexus"
-	verify(game.player is CharacterBody3D and game.camera is Camera3D,"NEXUS é 2.5D real")
-	verify(not game.interact_object("door"),"Painel final inicialmente trancado")
-	verify(not game.interact_object("transmitter"),"Final bloqueado antes do puzzle")
-	await move_to(4)
-	await operate("voss")
-	await mode(true)
-	verify(not game.interact_object("locks"),"GAIA não libera travas físicas")
-	await move_to(11)
-	await climb_to(2.6)
-	await move_to(11)
-	await operate("scan")
-	await mode(false)
-	await move_to(11)
-	await climb_to(0)
-	await move_to(13.3)
-	await climb_to(-2.7)
-	await move_to(18)
-	await operate("locks")
-	await move_to(24.5)
-	await climb_to(0)
-	await move_to(24.5)
-	await climb_to(2.6)
-	await mode(true)
-	await move_to(24)
-	await operate("authorize")
-	await move_to(24.5)
-	await climb_to(0)
-	await mode(false)
-	await move_to(27)
-	await operate("door")
-	await frames(80)
-	verify(game.environment.gate.collision_layer==0,"NEXUS abre passagem real")
-	await move_to(32)
-	await operate("transmitter")
-	verify(game.hud.modal_open,"Resumo final acessível por interface")
-	game.hud.close_modal()
-	verify(StationJourney.complete_nexus(),"Confirmação final aceita")
-	verify(SceneRouter.last_requested=="ending" and StationJourney.stage=="ending","Fluxo termina em epílogo 3D")
-	verify(StationJourney.validate(StationJourney.snapshot()),"Final continua persistível")
-	game.queue_free()
-	await frames(5)
+	StationJourney.reset()
+	verify(not StationJourney.complete_signal(),"Não há final sem puzzle e escolha")
 
 func ending_scenes() -> void:
-	for mask in [0,7]:
-		seed_choices(mask)
-		for flag in ["nexus_voss","nexus_scan","nexus_locks","nexus_authorized","nexus_open"]:StationJourney.put(flag,1)
-		StationJourney.complete_nexus()
+	for choice in ["RESTORE","EXODUS"]:
+		seed_water(choice)
+		StationJourney.complete_signal()
 		var ending_scene: Node3D = load("res://scenes/regions/epilogue.tscn").instantiate()
 		add_child(ending_scene)
 		await frames(10)
 		verify(ending_scene.player is CharacterBody3D,"Final "+StationJourney.ending()+" mantém cenário 3D")
-		verify(ending_scene.hud.get_child_count()>0,"Final apresenta narrativa e botão de retorno")
+		verify(ending_scene.hud.get_child_count()>0,"Final tem narrativa e retorno ao menu")
 		ending_scene.queue_free()
 		await frames(5)
 
@@ -136,11 +128,12 @@ func audio_checks() -> void:
 	verify(AudioDirector.gaia,"GAIA altera mixagem")
 	AudioDirector.set_gaia(false,false)
 
+
 func run() -> void:
 	StationJourney.persistence_enabled = false
 	AudioDirector.persistence_enabled = false
 	SceneRouter.test_mode = true
-	StationJourney.save_path = "user://mobile_qa_"+Crypto.new().generate_random_bytes(8).hex_encode()+".json"
+	StationJourney.save_path = "user://short_qa_"+Crypto.new().generate_random_bytes(8).hex_encode()+".json"
 	await open_demo()
 	verify(game.player is CharacterBody3D,"Protagonista é CharacterBody3D")
 	verify(game.player.sprite is AnimatedSprite3D,"Sprites originais em AnimatedSprite3D")
@@ -220,12 +213,11 @@ func run() -> void:
 	game.queue_free()
 	await frames(5)
 	persistence_checks()
-	await nexus_route()
 	await ending_scenes()
 	audio_checks()
 	for player in AudioDirector.physical_players+AudioDirector.ui_players+[AudioDirector.digital_player,AudioDirector.music_player]:
 		player.stop()
 		player.stream = null
 	await frames(75)
-	print("JORNADA MOBILE: %d verificações, %d falhas"%[assertions,failures])
+	print("JORNADA CURTA: %d verificações, %d falhas"%[assertions,failures])
 	get_tree().quit(0 if failures==0 else 1)

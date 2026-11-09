@@ -27,7 +27,7 @@ func _ready() -> void:
 	panel.add_child(layout)
 	layout.add_child(SignalTheme.label("RECIFE ANTIGO / 2187 · 2.5D MOBILE",17,SignalTheme.TEAL))
 	layout.add_child(SignalTheme.label("LAST SIGNAL: EARTH_404",32,SignalTheme.GOLD))
-	var description := SignalTheme.label("Explore o Recife. Alterne entre corpo e GAIA.\nÁgua, sementes e ar: três decisões, dois futuros.",20)
+	var description := SignalTheme.label("Duas fases: Recife Antigo e Capibaribe.\nCorpo + GAIA. Uma escolha de água, dois futuros.",20)
 	description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	description.custom_minimum_size.x = 660
 	layout.add_child(description)
@@ -56,7 +56,7 @@ func _new_game() -> void:
 		layout.remove_child(child)
 		child.queue_free()
 	layout.add_child(SignalTheme.label("REINICIAR JORNADA?",28,SignalTheme.GOLD))
-	layout.add_child(SignalTheme.label("Isso substitui apenas o save 2.5D deste dispositivo.\nAs decisões anteriores serão reiniciadas.",20))
+	layout.add_child(SignalTheme.label("Isso reinicia apenas esta campanha curta.\nOs arquivos de salvamento das edições anteriores são preservados.",20))
 	_button(layout,"Cancelar",func():get_tree().reload_current_scene()).grab_focus()
 	_button(layout,"Confirmar nova jornada",func():StationJourney.enter(false))
 

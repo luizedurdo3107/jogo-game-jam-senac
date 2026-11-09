@@ -2,131 +2,20 @@
   "water_decision": {
     "speaker": "NARA / CANAL COMUNITÁRIO",
     "lines": [
-      "A comporta está aberta. Este núcleo pode manter água para as casas ou alimentar os reservatórios da ARCA-01.",
-      "Restaurar clareia parte do canal e sustenta a distribuição. Reservar mantém o núcleo para quem parte. O destino fica salvo; pense em quem fica."
+      "A comporta está aberta. Este é o último núcleo disponível: ele pode manter água para as casas ou alimentar os reservatórios da ARCA-01.",
+      "Depois desta escolha, envie o sinal no transmissor à direita. A jornada termina mostrando quem recebe a água e o que acontece com você e Lyra."
     ],
     "choices": [
       {
         "text": "RESTAURAR água comunitária. Núcleo permanece no Recife.",
         "effect": {
-          "station": "water",
-          "choice": "RESTORE",
-          "flags": [
-            "water_decided"
-          ],
-          "checkpoint": 1480,
-          "checkpoint_id": "water",
-          "message": "ÁGUA → RESTAURAÇÃO. Nara: a água chega às casas. Ainda precisamos tratar o rio."
+          "choice": "RESTORE"
         }
       },
       {
         "text": "RESERVAR núcleo de água para o ÊXODO.",
         "effect": {
-          "station": "water",
-          "choice": "EXODUS",
-          "flags": [
-            "water_decided"
-          ],
-          "checkpoint": 1480,
-          "checkpoint_id": "water",
-          "message": "ÁGUA → ÊXODO. Nara: vamos manter o registro reparado, mas falta energia para o tratamento contínuo."
-        }
-      }
-    ]
-  },
-  "soil_decision": {
-    "speaker": "LYRA / BANCO VERDE",
-    "lines": [
-      "Ainda existem sementes vivas aqui. Com o núcleo, a estufa pode manter uma pequena área de solo. Sem ele, as cápsulas seguem preservadas para o transporte.",
-      "Eu quero ter uma chance de viver, mas também quero que alguém possa plantar aqui amanhã. Você escolhe o destino deste núcleo."
-    ],
-    "choices": [
-      {
-        "text": "RESTAURAR estufa e solo. Manter o núcleo no Recife.",
-        "effect": {
-          "station": "soil",
-          "choice": "RESTORE",
-          "flags": [
-            "soil_decided"
-          ],
-          "checkpoint": 2640,
-          "checkpoint_id": "soil",
-          "message": "SOLO → RESTAURAÇÃO. Um pequeno broto aparece na área segura. A estufa ainda exige cuidado."
-        }
-      },
-      {
-        "text": "RESERVAR o núcleo do solo para o ÊXODO.",
-        "effect": {
-          "station": "soil",
-          "choice": "EXODUS",
-          "flags": [
-            "soil_decided"
-          ],
-          "checkpoint": 2640,
-          "checkpoint_id": "soil",
-          "message": "SOLO → ÊXODO. Cápsulas isoladas para o transporte; a estufa local permanece sem energia contínua."
-        }
-      }
-    ]
-  },
-  "air_decision": {
-    "speaker": "GAIA / TORRE ATMOS",
-    "lines": [
-      "A torre está pronta. Um núcleo mantém a filtragem local e reduz parte da névoa. A alternativa é alimentar o suporte de vida da ARCA-01.",
-      "Não prometo restaurar a Terra por completo. Posso sustentar o trabalho que começa agora. Este é o último dos três destinos."
-    ],
-    "choices": [
-      {
-        "text": "RESTAURAR filtragem do ar no Recife.",
-        "effect": {
-          "station": "air",
-          "choice": "RESTORE",
-          "flags": [
-            "air_decided"
-          ],
-          "checkpoint": 3940,
-          "checkpoint_id": "air",
-          "message": "AR → RESTAURAÇÃO. Parte da névoa recua; Lyra ainda precisa de um filtro e tratamento."
-        }
-      },
-      {
-        "text": "RESERVAR núcleo do ar para o ÊXODO.",
-        "effect": {
-          "station": "air",
-          "choice": "EXODUS",
-          "flags": [
-            "air_decided"
-          ],
-          "checkpoint": 3940,
-          "checkpoint_id": "air",
-          "message": "AR → ÊXODO. Suporte de vida da ARCA-01 recebe energia. A névoa sobre o Recife permanece."
-        }
-      }
-    ]
-  },
-  "air_technician": {
-    "speaker": "TÉCNICA DA NEXUS",
-    "lines": [
-      "A equipe está presa aqui desde o último turno. Não posso liberar o controle enquanto faltar ar nos alojamentos."
-    ],
-    "choices": [
-      {
-        "text": "Fornecer ar à equipe pela derivação identificada por GAIA.",
-        "effect": {
-          "flags": [
-            "air_team"
-          ],
-          "message": "A equipe recebeu ar. A técnica libera o terminal; GAIA pode autorizar o controle."
-        }
-      },
-      {
-        "text": "Coordenar uma pausa segura e compartilhar o fluxo de ar.",
-        "effect": {
-          "flags": [
-            "air_team",
-            "team_shared"
-          ],
-          "message": "O fluxo é compartilhado com a equipe. A técnica coopera e libera a autorização."
+          "choice": "EXODUS"
         }
       }
     ]

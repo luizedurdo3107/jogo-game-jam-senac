@@ -64,7 +64,7 @@ func diagnostic() -> String:
 	return "REDE HÍDRICA / %s\nPRESSÃO %d / 60 kPa · CONTAMINAÇÃO %d%%\nCÂMARA %s · MÓDULO %d/2"%["CANAL B" if value("water_route")==1 else "FALHA DE ROTA",pressure(),18 if journey.choices.water=="RESTORE" else 82,"DRENADA" if value("water_drained")==1 else "ALAGADA",value("water_module")]
 
 func objective() -> String:
-	if journey.choices.water!="PENDING":return "Água: destino registrado. Siga pela saída para o Banco Verde."
+	if journey.choices.water!="PENDING":return "Destino registrado. Siga ao transmissor à direita e conclua a jornada."
 	if value("water_route")!=1:return "GAIA: selecione o canal B no roteador e consulte a memória do rio."
 	if value("water_drained")==0:return "GAIA: autorize a drenagem da câmara inferior."
 	if value("water_module")==0:return "Físico: desça à câmara drenada e recolha o módulo."
@@ -73,4 +73,4 @@ func objective() -> String:
 	if value("water_authorized")==0:return "GAIA: analise a pressão e autorize o controlador."
 	if value("water_pump")==0:return "Físico: ligue a bomba e observe o reservatório."
 	if value("water_open")==0:return "Físico: abra a comporta Capibaribe."
-	return "Decida o destino do núcleo e siga para o Banco Verde."
+	return "Decida o destino da água. Depois transmita o último sinal para ver o final."

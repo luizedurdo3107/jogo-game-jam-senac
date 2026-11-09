@@ -1,12 +1,12 @@
 {
   "ending_a": {
-    "chapter": "FINAL A / TRANSMISSÃO PARA QUEM FICA",
-    "title": "A primeira primavera",
-    "text": "A maior parte dos núcleos permanece no Recife. A ARCA-01 não leva {player} e Lyra. A comunidade reúne ferramentas, filtros e tempo para começar.\n\nNos sistemas restaurados, a água clareia um pouco, um broto encontra solo seguro ou uma faixa da névoa recua. Nada disso cura o planeta de uma vez. GAIA ainda trabalha com incerteza.\n\nLyra continua precisando de tratamento. Nara organiza turnos para que o cuidado não dependa de uma só pessoa. A primeira primavera é uma promessa de trabalho compartilhado, não uma garantia."
+    "chapter": "FINAL / UM SINAL PARA QUEM FICA",
+    "title": "O amanhã ainda é Recife",
+    "text": "O núcleo permanece na Estação Capibaribe. A bomba retoma o tratamento e a água volta a uma parte das casas. Nara responde pelo rádio: o primeiro turno de cuidado já está organizado.\n\n{player} e Lyra deixam passar a última chamada da ARCA-01. Eles ficam com a comunidade. Lyra ainda precisa de tratamento; restaurar uma estação não cura o planeta nem resolve tudo de uma vez.\n\nGAIA registra o sinal e mantém o sistema sob observação. Pela primeira vez naquela noite, o rádio não pede socorro: anuncia água chegando. A jornada termina aqui. O trabalho por um Recife habitável continua."
   },
   "ending_b": {
-    "chapter": "FINAL B / TRANSMISSÃO PARA QUEM PARTE",
+    "chapter": "FINAL / UM SINAL PARA QUEM PARTE",
     "title": "O último adeus",
-    "text": "A maior parte dos núcleos alimenta a ARCA-01. {player} e Lyra partem com os evacuados. Helena Voss chama isso de preservar uma chance para a humanidade.\n\nPela vigia, o Recife desaparece sob a névoa. Os moradores continuam lá. Os reparos locais que receberam um núcleo permanecem, mas o problema ambiental não foi resolvido.\n\nNara mantém o rádio da comunidade ligado. Lyra pede que seu sinal não seja esquecido. GAIA arquiva as coordenadas da Terra: partir preservou algumas vidas; também deixou uma responsabilidade para trás."
+    "text": "O núcleo é destinado aos reservatórios da ARCA-01. A confirmação chega pelo rádio: {player} e Lyra têm lugar entre os evacuados. A bomba reparada fica no Recife, mas sem energia para manter o tratamento contínuo.\n\nNa partida, Lyra olha as pontes pela última vez. Eles preservaram uma chance de sobreviver; a cidade e seus moradores continuam precisando de água. Não há vitória sem custo.\n\nNara mantém o canal comunitário aberto. GAIA arquiva as coordenadas e envia uma resposta antes de o Recife sumir na névoa: o sinal da Terra não será esquecido. A jornada termina com a partida, não com o fim dessa responsabilidade."
   }
 }

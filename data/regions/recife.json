@@ -10,7 +10,7 @@
       ],
       "kind": "npc",
       "label": "NARA · COMUNIDADE",
-      "text": "A maré levou quase tudo. Ainda existe energia no arquivo subterrâneo. Se puder reabrir a comporta, a água volta para as casas."
+      "text": "A maré levou quase tudo. O terminal antigo pode abrir o caminho à Casa das Águas. Recupere a passagem e depois reative a bomba do Capibaribe. A comunidade precisa de água; a ARCA-01 também aguarda reservas."
     },
     {
       "id": "terminal",
@@ -127,7 +127,7 @@
         ]
       },
       "done": "recife_gate",
-      "text": "Passagem aberta. Siga à direita até o acesso da Estação Capibaribe. Lá você decidirá o destino do primeiro núcleo ambiental."
+      "text": "Passagem aberta. Siga à direita até a Estação Capibaribe, a última fase. Lá você escolherá o destino da água e transmitirá o último sinal para concluir a jornada."
     },
     {
       "id": "exit",

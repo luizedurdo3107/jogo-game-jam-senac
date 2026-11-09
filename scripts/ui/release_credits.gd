@@ -22,7 +22,7 @@ func _ready() -> void:
 	layout.add_theme_constant_override("separation",12)
 	panel.add_child(layout)
 	layout.add_child(SignalTheme.label("LAST SIGNAL: EARTH_404 / CRÉDITOS",24,SignalTheme.TEAL))
-	var description := SignalTheme.label("Versão %s · Recife, 2187\n\nPersonagem e referências visuais: materiais fornecidos pelo responsável pelo projeto, preservados.\nProgramação e ferramentas: Godot 4 / GDScript.\nÁudio: sound design procedural original, sem TTS.\n\nJornada unificada 2.5D: Recife, três estações, NEXUS e dois finais. Música e gravações humanas finais ainda não integram esta edição.\n\nGodot Engine — licença MIT: godotengine.org/license\nAvisos completos de terceiros acompanham a distribuição."%ProjectSettings.get_setting("application/config/version"),17)
+	var description := SignalTheme.label("Versão %s · Recife, 2187\n\nPersonagem e referências visuais: materiais fornecidos pelo responsável pelo projeto, preservados.\nProgramação e ferramentas: Godot 4 / GDScript.\nÁudio: sound design procedural original, sem TTS.\n\nCampanha curta 2.5D: Recife Antigo, Capibaribe e encerramento conforme o destino da água. Música e gravações humanas finais ainda não integram esta edição.\n\nGodot Engine — licença MIT: godotengine.org/license\nAvisos completos de terceiros acompanham a distribuição."%ProjectSettings.get_setting("application/config/version"),17)
 	description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	description.custom_minimum_size.x = 650
 	layout.add_child(description)
