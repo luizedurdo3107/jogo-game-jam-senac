@@ -38,6 +38,8 @@ func _ready() -> void:
 
 func resolve_profile() -> String:
 	if region=="nova_eden":return "nova"
+	if region=="laboratory":return "lab"
+	if region=="boss":return "nexus"
 	if region=="ruinas_laboratorio":return "lab" if actor and actor.position.x>=1070 and actor.position.y<620 else "recife"
 	if region=="estacoes_ambientais":return "water" if actor.position.x<1480 else ("soil" if actor.position.x<2800 else "air")
 	if region=="complexo_nexus":return "nexus"
@@ -113,7 +115,7 @@ func sync_machines() -> void:
 			if previously!=moving:emit("lift_start" if moving else "lift_stop",lift.position)
 	if world.get("drone") is Node3D or world.get("drone") is Node2D:
 		var drone: Node = world.drone
-		set_machine("drone",true,"drone_rotor",drone.position)
+		set_machine("drone",drone.visible,"drone_rotor",drone.position)
 		var alert: bool = float(world.get("suspicion"))>0.7 if is_3d else drone.state=="alert"
 		if alert and not previous_alert:emit("drone_alert",drone.position)
 		previous_alert = alert

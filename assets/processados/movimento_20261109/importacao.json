@@ -1,0 +1,10 @@
+{
+	"fps": 12,
+	"frame_height": 216,
+	"frame_width": 90,
+	"frames": 12,
+	"limits": "Walk supplied by team video. Original idle retained. Jump/climb use held poses; no independent source cycles supplied. Video soundtrack is not used.",
+	"method": "Border-connected near-white flood fill; enclosed pale face and clothing preserved. Common bounds, foot alignment, nearest-neighbour scaling.",
+	"source": "res://assets/originais/movimento_20261109/WhatsApp Video 2026-11-09 at 10.49.07.mp4",
+	"source_sha256": "c54926498e45008038759d7b353b999d8ae02592828cc1f72cb7fabe4886b149"
+}

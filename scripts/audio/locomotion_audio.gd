@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 
 func _animation_contact() -> void:
 	if not is_instance_valid(actor) or not is_instance_valid(soundscape):return
-	if sprite.animation!="walk" or sprite.frame not in [1,5] or not actor.is_on_floor() or actor.climbing or travelled<0.15:return
+	if sprite.animation!="walk" or sprite.frame not in [1,7] or not actor.is_on_floor() or actor.climbing or travelled<0.15:return
 	travelled = 0
 	surface = floor_surface()
 	soundscape.emit("step_"+surface,actor.global_position)

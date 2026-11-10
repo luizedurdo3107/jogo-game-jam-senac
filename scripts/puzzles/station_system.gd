@@ -2,6 +2,9 @@ extends RefCounted
 
 var journey: Node
 
+func sync_access() -> void:
+	pass
+
 func value(key: String) -> int:
 	return journey.value(key)
 

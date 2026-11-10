@@ -1,0 +1,48 @@
+{
+  "title": "PRESENTE / ÚLTIMO COMBATE NA TERRA",
+  "region": "Terra · Doca da ARCA-01",
+  "gate_flag": "",
+  "intro": "COMANDANTE DE NOVA ÉDEN: ninguém deixa o planeta. A ARCA está sob nosso controle.\n\nEnfrente a guarnição com o bastão. Amarelo avisa; vermelho golpeia. Recue, salte e ataque depois do combo.\n\nGAIA: meu compromisso é recuperar a Terra. Vou ajudar quem fica. Suspendi o embarque, mas não atacarei pessoas. Se insistir em partir, os comandos de manutenção serão responsabilidade sua.",
+  "tutorial": "F: bastão · Espaço: esquiva · Depois da batalha, Q/E: comandos locais de embarque.",
+  "objects": [
+    {"id":"equipment","at":[5,0],"label":"EQUIPAR BASTÃO","mode":"physical"},
+    {
+      "id": "breaker",
+      "at": [
+        8,
+        0
+      ],
+      "label": "TRAVA · ANALISAR / DESLIGAR",
+      "mode": "both"
+    },
+    {
+      "id": "redirect",
+      "at": [
+        16,
+        0
+      ],
+      "label": "INTERFACE LOCAL / DESVIAR BARREIRA",
+      "mode": "gaia"
+    },
+    {
+      "id": "shutdown",
+      "at": [
+        24,
+        0
+      ],
+      "label": "DESLIGAR BLOQUEIO",
+      "mode": "physical"
+    },
+    {
+      "id": "transmit",
+      "at": [
+        34.5,
+        0
+      ],
+      "label": "CONFIRMAR EMBARQUE PARA MARTE",
+      "mode": "physical"
+    }
+  ],
+  "objectives": [],
+  "opening_puzzle": true
+}

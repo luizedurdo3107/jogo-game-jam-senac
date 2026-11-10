@@ -1,0 +1,91 @@
+[gd_resource type="SpriteFrames" load_steps=23 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/processados/protagonista_provisorio/personagem.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/processados/movimento_20261109/walk.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="Idle0"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 83, 216)
+
+[sub_resource type="AtlasTexture" id="Idle1"]
+atlas = ExtResource("1")
+region = Rect2(83, 0, 83, 216)
+
+[sub_resource type="AtlasTexture" id="Idle2"]
+atlas = ExtResource("1")
+region = Rect2(166, 0, 83, 216)
+
+[sub_resource type="AtlasTexture" id="Idle3"]
+atlas = ExtResource("1")
+region = Rect2(249, 0, 83, 216)
+
+[sub_resource type="AtlasTexture" id="Idle4"]
+atlas = ExtResource("1")
+region = Rect2(332, 0, 83, 216)
+
+[sub_resource type="AtlasTexture" id="Idle5"]
+atlas = ExtResource("1")
+region = Rect2(415, 0, 83, 216)
+
+[sub_resource type="AtlasTexture" id="Idle6"]
+atlas = ExtResource("1")
+region = Rect2(498, 0, 83, 216)
+
+[sub_resource type="AtlasTexture" id="Idle7"]
+atlas = ExtResource("1")
+region = Rect2(581, 0, 83, 216)
+
+[sub_resource type="AtlasTexture" id="Walk0"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk1"]
+atlas = ExtResource("2")
+region = Rect2(90, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk2"]
+atlas = ExtResource("2")
+region = Rect2(180, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk3"]
+atlas = ExtResource("2")
+region = Rect2(270, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk4"]
+atlas = ExtResource("2")
+region = Rect2(360, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk5"]
+atlas = ExtResource("2")
+region = Rect2(450, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk6"]
+atlas = ExtResource("2")
+region = Rect2(540, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk7"]
+atlas = ExtResource("2")
+region = Rect2(630, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk8"]
+atlas = ExtResource("2")
+region = Rect2(720, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk9"]
+atlas = ExtResource("2")
+region = Rect2(810, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk10"]
+atlas = ExtResource("2")
+region = Rect2(900, 0, 90, 216)
+
+[sub_resource type="AtlasTexture" id="Walk11"]
+atlas = ExtResource("2")
+region = Rect2(990, 0, 90, 216)
+
+[resource]
+animations = [{
+"name": &"idle", "loop": true, "speed": 10.0, "frames": [{"duration": 1.0, "texture": SubResource("Idle0")},{"duration": 1.0, "texture": SubResource("Idle1")},{"duration": 1.0, "texture": SubResource("Idle2")},{"duration": 1.0, "texture": SubResource("Idle3")},{"duration": 1.0, "texture": SubResource("Idle4")},{"duration": 1.0, "texture": SubResource("Idle5")},{"duration": 1.0, "texture": SubResource("Idle6")},{"duration": 1.0, "texture": SubResource("Idle7")}]
+}, {
+"name": &"walk", "loop": true, "speed": 12.0, "frames": [{"duration": 1.0, "texture": SubResource("Walk0")},{"duration": 1.0, "texture": SubResource("Walk1")},{"duration": 1.0, "texture": SubResource("Walk2")},{"duration": 1.0, "texture": SubResource("Walk3")},{"duration": 1.0, "texture": SubResource("Walk4")},{"duration": 1.0, "texture": SubResource("Walk5")},{"duration": 1.0, "texture": SubResource("Walk6")},{"duration": 1.0, "texture": SubResource("Walk7")},{"duration": 1.0, "texture": SubResource("Walk8")},{"duration": 1.0, "texture": SubResource("Walk9")},{"duration": 1.0, "texture": SubResource("Walk10")},{"duration": 1.0, "texture": SubResource("Walk11")}]
+}]

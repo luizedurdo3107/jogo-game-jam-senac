@@ -1,0 +1,61 @@
+{
+  "title": "01 / NOVA ÉDEN",
+  "region": "Nova Éden · Avenida do Domo",
+  "gate_flag": "nova_open",
+  "intro": "Nova Éden, 2187. O exército fechou a cidade. Lyra marcou um arsenal na avenida: abra os três relés seguindo a etiqueta e pegue o bastão de pulso. Depois enfrente a patrulha para sair rumo ao Recife, ainda na Terra.\n\nDifícil já está ativo: quatro pontos de vida, dois soldados pressionando e um capitão com combo. Você pode trocar para Padrão na pausa.",
+  "tutorial": "A/D mover · E arsenal / rádio · F bastão · Espaço esquivar · Esc dificuldade",
+  "objects": [
+    {
+      "id": "lyra",
+      "at": [
+        4,
+        0
+      ],
+      "label": "LYRA · RÁDIO",
+      "kind": "npc",
+      "mode": "physical",
+      "done": "nova_contact",
+      "effect": {
+        "flags": [
+          "nova_contact"
+        ]
+      },
+      "requires": {},
+      "text": "Lyra, pelo rádio: o arsenal está logo à direita. A etiqueta dos relés é a pista. Pegue o bastão antes de enfrentar a tropa; as armaduras resistem a socos. Golpeie na brecha, recue para recuperar o fôlego e desvie dos ataques vermelhos. O capitão desfere dois golpes no Difícil."
+    },
+    {
+      "id": "armory",
+      "at": [
+        6.5,
+        0
+      ],
+      "label": "ARSENAL / ABRIR E PEGAR BASTÃO",
+      "kind": "terminal",
+      "mode": "physical"
+    },
+    {
+      "id": "exit",
+      "at": [
+        34.5,
+        0
+      ],
+      "label": "ESCAPAR PARA O RECIFE",
+      "kind": "exit",
+      "mode": "physical",
+      "requires": {
+        "nova_open": true
+      }
+    }
+  ],
+  "objectives": [
+    [
+      "nova_open",
+      "Abra o arsenal, pegue o bastão e vença a patrulha."
+    ],
+    [
+      "nova_escaped",
+      "Saída livre. Escape para o Recife, à direita."
+    ]
+  ],
+  "opening_puzzle": true
+}

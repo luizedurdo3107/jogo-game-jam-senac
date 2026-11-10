@@ -276,9 +276,7 @@ func open_settings(owner: Node) -> void:
 func quit_game() -> void:
 	if shutting_down:return
 	if OS.has_feature("web"):
-		get_tree().paused = false
-		if StationJourney.active:StationJourney.leave()
-		get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+		SceneRouter.menu()
 		return
 	shutting_down = true
 	for tween in [volume_tween,scene_tween,filter_tween]:

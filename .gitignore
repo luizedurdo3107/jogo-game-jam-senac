@@ -7,6 +7,9 @@ export_credentials.cfg
 outputs/web/
 outputs/linux/
 outputs/windows/
+outputs/itch_io/
+outputs/qa/
+outputs/pitch/
 outputs/*.import
 dist/
 .env

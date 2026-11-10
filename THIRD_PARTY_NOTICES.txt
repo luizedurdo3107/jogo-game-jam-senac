@@ -1,4 +1,4 @@
-LAST SIGNAL: EARTH_404 — versão 1.0.0
+LAST SIGNAL: EARTH_404 — versão 1.1.0-rc5
 
 Godot Engine: licença MIT. Veja LICENSES/GODOT_MIT.txt.
 Bibliotecas incorporadas pelo Godot: veja LICENSES/GODOT_THIRD_PARTY.txt.
@@ -15,3 +15,14 @@ de adequação ou exclusividade. Veja assets/audio/ORIGEM_E_LICENCA.md no projet
 
 Não há TTS. Música instrumental final e gravações humanas autorizadas não
 integram esta edição. Não foram incorporadas músicas de terceiros.
+
+O panorama adicional de Nova Éden e o atlas ilustrado dos soldados em
+assets/processados/nova_eden_rc4/ foram gerados com a ferramenta integrada
+ImageGen em 09/11/2026 para esta revisão. Não são artes originais da equipe.
+As artes e o protagonista fornecidos foram preservados sem substituição.
+Prompts e proveniência acompanham o código-fonte em PROVENIENCIA.md nessa pasta.
+
+A nave ARCA-01 e o globo terrestre rc5 são recursos procedurais deste projeto,
+construídos em GDScript. Os mapas estilizados de superfície e nuvens não são
+imagens de satélite nem dados geográficos licenciados de terceiros. Veja
+assets/processados/arca_rc5/PROVENIENCIA.md.

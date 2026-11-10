@@ -1,18 +1,129 @@
 {
-  "id":"water","title":"CAPIBARIBE / CASA DAS ÁGUAS","width":34,"height":8,
-  "intro":"ÚLTIMA FASE / CAPIBARIBE. GAIA abriu a passagem. Recupere a bomba, escolha entre água para a comunidade e reservas para a ARCA-01 e transmita o último sinal. O corpo opera a infraestrutura; GAIA controla as conexões invisíveis.",
-  "objects":[
-    {"id":"route","at":[5,0],"mode":"gaia","kind":"digital","label":"ROTEADOR / TRÊS CANAIS","command":"route"},
-    {"id":"memory","at":[8,2.6],"mode":"gaia","kind":"memory","label":"MEMÓRIA / CAPIBARIBE 2034","command":"memory"},
-    {"id":"drain","at":[9,0],"mode":"gaia","kind":"digital","label":"DRENAGEM REMOTA AUTORIZADA","command":"drain"},
-    {"id":"module","at":[15,-2.7],"mode":"physical","kind":"battery","label":"MÓDULO DA BOMBA","command":"module"},
-    {"id":"install","at":[18,0],"mode":"physical","kind":"pump","label":"SOQUETE / BOMBA","command":"install"},
-    {"id":"valve_a","at":[12,0],"mode":"physical","kind":"valve","label":"REGISTRO A / 20 kPa POR POSIÇÃO","command":"valve_a"},
-    {"id":"valve_b","at":[22,2.6],"mode":"physical","kind":"valve","label":"REGISTRO B / 10 kPa POR POSIÇÃO","command":"valve_b"},
-    {"id":"authorize","at":[25,2.6],"mode":"gaia","kind":"digital","label":"CONTROLADOR / ANALISAR PRESSÃO","command":"authorize"},
-    {"id":"pump","at":[20,0],"mode":"physical","kind":"pump","label":"LIGAR BOMBA FÍSICA","command":"pump"},
-    {"id":"door","at":[27,0],"mode":"physical","kind":"door","label":"ABRIR COMPORTA CAPIBARIBE","command":"door"},
-    {"id":"decision","at":[31,0],"mode":"physical","kind":"decision","label":"ÁGUA / DESTINO DO NÚCLEO"},
-    {"id":"exit","at":[33,0],"mode":"physical","kind":"exit","label":"ÚLTIMO SINAL / CONCLUIR JORNADA"}
-  ]
+  "id": "water",
+  "title": "04 / ESTAÇÃO CAPIBARIBE",
+  "width": 34,
+  "height": 8,
+  "intro": "O laboratório GAIA abriu o acesso aos três núcleos. No Capibaribe, energia não basta: a rede precisa de uma rota limpa e de pressão segura. O corpo opera a infraestrutura; GAIA controla as conexões invisíveis.",
+  "objects": [
+    {
+      "id": "route",
+      "at": [
+        5,
+        0
+      ],
+      "mode": "gaia",
+      "kind": "digital",
+      "label": "ROTEADOR / TRÊS CANAIS",
+      "command": "route"
+    },
+    {
+      "id": "memory",
+      "at": [
+        8,
+        2.6
+      ],
+      "mode": "gaia",
+      "kind": "memory",
+      "label": "MEMÓRIA / CAPIBARIBE 2034",
+      "command": "memory"
+    },
+    {
+      "id": "drain",
+      "at": [
+        9,
+        0
+      ],
+      "mode": "gaia",
+      "kind": "digital",
+      "label": "DRENAGEM REMOTA AUTORIZADA",
+      "command": "drain"
+    },
+    {
+      "id": "module",
+      "at": [
+        15,
+        -2.7
+      ],
+      "mode": "physical",
+      "kind": "battery",
+      "label": "MÓDULO DA BOMBA",
+      "command": "module"
+    },
+    {
+      "id": "install",
+      "at": [
+        18,
+        0
+      ],
+      "mode": "physical",
+      "kind": "pump",
+      "label": "SOQUETE / BOMBA",
+      "command": "install"
+    },
+    {
+      "id": "valve_a",
+      "at": [
+        12,
+        0
+      ],
+      "mode": "physical",
+      "kind": "valve",
+      "label": "REGISTRO A / 20 kPa POR POSIÇÃO",
+      "command": "valve_a"
+    },
+    {
+      "id": "valve_b",
+      "at": [
+        22,
+        2.6
+      ],
+      "mode": "physical",
+      "kind": "valve",
+      "label": "REGISTRO B / 10 kPa POR POSIÇÃO",
+      "command": "valve_b"
+    },
+    {
+      "id": "authorize",
+      "at": [
+        25,
+        2.6
+      ],
+      "mode": "gaia",
+      "kind": "digital",
+      "label": "CONTROLADOR / ANALISAR PRESSÃO",
+      "command": "authorize"
+    },
+    {
+      "id": "pump",
+      "at": [
+        20,
+        0
+      ],
+      "mode": "physical",
+      "kind": "pump",
+      "label": "LIGAR BOMBA FÍSICA",
+      "command": "pump"
+    },
+    {
+      "id": "decision",
+      "at": [
+        31,
+        0
+      ],
+      "mode": "physical",
+      "kind": "decision",
+      "label": "ÁGUA / DESTINO DO NÚCLEO"
+    },
+    {
+      "id": "exit",
+      "at": [
+        33,
+        0
+      ],
+      "mode": "physical",
+      "kind": "exit",
+      "label": "BANCO VERDE / PRÓXIMA ESTAÇÃO"
+    }
+  ],
+  "opening_puzzle": false
 }

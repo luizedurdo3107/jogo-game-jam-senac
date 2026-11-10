@@ -120,6 +120,7 @@ func _segment(parent: Node3D, start: Vector3, finish: Vector3, thickness: float,
 	return mesh
 
 func add_path(points: Array, color := Color("51d5dc")) -> int:
+	if points.size()<2:return -1
 	var paint := glow(color)
 	for index in range(points.size()-1):
 		_segment(digital_root,points[index],points[index+1],0.035,paint)
@@ -161,7 +162,8 @@ func show_memory(kind: String, at: Vector3) -> void:
 	memory.position = at+Vector3(0,1.8,-0.7)
 	memory.visible = true
 	var title := Label3D.new()
-	title.text = "ARQUIVO HISTÓRICO / %s\nRECONSTRUÇÃO · PASSADO IMUTÁVEL"%kind.to_upper()
+	var timeline: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/story/timeline.json"))
+	title.text = "PASSADO / %s\nARQUIVO · NÃO É VIAGEM NO TEMPO"%str(timeline.records.get(kind,"Memória do Recife"))
 	title.font_size = 24
 	title.pixel_size = 0.008
 	title.position.y = 1.7

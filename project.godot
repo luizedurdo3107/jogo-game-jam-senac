@@ -15,10 +15,14 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="LAST SIGNAL: EARTH_404"
-config/version="1.0.0"
 config/description="Uma aventura sobre cuidado, memória e o futuro do Recife."
+config/version="1.1.0-rc5"
 run/main_scene="res://scenes/ui/main_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[audio]
+
+general/default_playback_type.web=0
 
 [autoload]
 
@@ -26,11 +30,6 @@ GameState="*res://scripts/core/session_state.gd"
 SceneRouter="*res://scripts/core/scene_router.gd"
 StationJourney="*res://scripts/core/journey.gd"
 AudioDirector="*res://scripts/audio/audio_director.gd"
-
-[audio]
-
-buses/default_bus_layout="res://default_bus_layout.tres"
-general/default_playback_type.web=0
 
 [display]
 
@@ -40,7 +39,6 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/handheld/orientation=0
 
 [input_devices]
 

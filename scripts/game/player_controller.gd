@@ -22,7 +22,7 @@ func _ready() -> void:
 	collision.position.y = 0.78
 	add_child(collision)
 	sprite = AnimatedSprite3D.new()
-	sprite.sprite_frames = preload("res://assets/processados/protagonista_provisorio/sprite_frames.tres")
+	sprite.sprite_frames = preload("res://assets/processados/movimento_20261109/sprite_frames.tres")
 	sprite.pixel_size = 0.008
 	sprite.position.y = 0.835
 	sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
@@ -96,8 +96,9 @@ func _physics_process(delta: float) -> void:
 		sprite.pause()
 	else:
 		sprite.play("walk" if absf(velocity.x) > 0.2 else "idle")
+		sprite.speed_scale = clampf(absf(velocity.x)/SPEED,0.65,1.1) if sprite.animation=="walk" else 1.0
 	if position.y < -7:
-		position = Vector3(10, 0.2, 0)
+		position = StationJourney.checkpoint()
 		velocity = Vector3.ZERO
 		_end_climb()
 

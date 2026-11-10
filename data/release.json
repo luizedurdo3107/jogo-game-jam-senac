@@ -1,21 +1,32 @@
 {
   "name": "LAST SIGNAL: EARTH_404",
-  "version": "1.0.0",
+  "version": "1.1.0-rc5",
   "engine": "Godot 4.7.2",
   "repository": "https://github.com/luizedurdo3107/jogo-game-jam-senac",
+  "edition": "Jornada restaurada",
   "contents": [
-    "duas fases 2.5D",
-    "Recife Antigo",
-    "Capibaribe",
-    "transmissão final na segunda fase",
-    "dois desfechos conforme a água",
-    "controles mobile",
-    "79 recursos sonoros originais"
+    "sete regiões 2.5D",
+    "introdução de 42 segundos",
+    "água, sementes e ar: puzzles distintos",
+    "decisão definitiva no NEXUS",
+    "Terra e Marte: finais cinematográficos",
+    "caminhada do vídeo de 09/11",
+    "79 recursos sonoros originais",
+    "passado arquivado, presente de 2187 e consequências futuras identificados",
+    "menu cinematográfico responsivo com arte original, foco por teclado e confirmação de reinício",
+    "combate físico contra o exército na fuga de Nova Éden",
+    "passagens automáticas nas estações; NEXUS sem fechadura extra",
+    "Nova Éden: avenida futurista 2.5D, panorama e soldados ilustrados com quatro poses",
+    "arsenal com relés, porta animada e bastão de pulso coletável",
+    "dificuldade Padrão/Difícil, fôlego, pressão de dupla e combo do capitão",
+    "batalha final na doca terrestre contra a guarnição de Nova Éden, antes de embarcar para Marte",
+    "ARCA-01 detalhada: asas, cockpit, janelas, motores animados e trem de pouso retrátil",
+    "Terra com continentes, oceanos, calotas, nuvens independentes e halo atmosférico"
   ],
   "limitations": [
-    "música final e dublagem humana pendentes",
-    "sprites originais sem ciclos dedicados adicionais",
-    "validação em celulares físicos Android/iOS pendente"
-  ],
-  "edition": "Campanha curta"
+    "arte low-poly, não reprodução fotorrealista dos conceitos",
+    "saltos e escadas ainda usam poses, não ciclos dedicados",
+    "música final e gravações humanas não fornecidas",
+    "playtest humano e celulares físicos pendentes"
+  ]
 }

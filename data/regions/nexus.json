@@ -1,0 +1,40 @@
+{
+  "title": "07 / COMPLEXO NEXUS · PORTO DO RECIFE",
+  "width": 36,
+  "height": 10,
+  "intro": "O caminho até a decisão está livre. Ouça Voss no rádio e siga ao transmissor. Não há condutores, chaves ou painéis extras para destravar. GAIA ajuda a recuperar a Terra; só haverá contenção se você insistir em partir para Marte.",
+  "objects": [
+    {
+      "id": "voss",
+      "at": [
+        4,
+        0
+      ],
+      "kind": "npc",
+      "mode": "physical",
+      "label": "HELENA VOSS / CANAL NEXUS",
+      "command": "nexus_voss"
+    },
+    {
+      "id": "scan",
+      "at": [
+        11,
+        2.6
+      ],
+      "mode": "gaia",
+      "label": "ANÁLISE DOS TRÊS NÚCLEOS",
+      "command": "nexus_scan"
+    },
+    {
+      "id": "transmitter",
+      "at": [
+        32,
+        0
+      ],
+      "kind": "final",
+      "mode": "physical",
+      "label": "CONFERIR E TRANSMITIR"
+    }
+  ],
+  "opening_puzzle": false
+}

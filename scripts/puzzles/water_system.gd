@@ -1,5 +1,8 @@
 extends "res://scripts/puzzles/station_system.gd"
 
+func sync_access() -> void:
+	if value("water_pump")==1:set_value("water_open",1)
+
 func pressure() -> int:
 	return value("water_a")*20+value("water_b")*10
 
@@ -26,7 +29,7 @@ func interact(command: String) -> Dictionary:
 			if value("water_module")!=1:
 				return blocked("Recolha o módulo na câmara inferior já drenada.")
 			set_value("water_module",2)
-			return accepted("Módulo encaixado. Ajuste fisicamente A=2 e B=2; depois peça a validação digital.")
+			return accepted("Módulo encaixado. Abra os dois registros e observe a pressão. A faixa segura está marcada na bomba.")
 		"valve_a","valve_b":
 			if value("water_pump")==1:
 				return blocked("Registros travados em regime seguro após a abertura.")
@@ -43,12 +46,8 @@ func interact(command: String) -> Dictionary:
 			if value("water_authorized")!=1 or pressure()!=60 or value("water_module")!=2 or value("water_route")!=1:
 				return blocked("Bomba intertravada: valide a rede e os 60 kPa com GAIA antes da partida física.")
 			set_value("water_pump",1)
-			return accepted("Bomba em movimento. O reservatório está recebendo água; abra a comporta física.")
-		"door":
-			if value("water_pump")!=1:
-				return blocked("Comporta sem pressão. Diagnostique o fluxo, drene a câmara, instale o módulo e ligue a bomba.")
 			set_value("water_open",1)
-			return accepted("Comporta liberada. O roteador adiante decide entre tratar a água da comunidade ou reservar energia para a ARCA.")
+			return accepted("Bomba em movimento. Água circulando e passagem automática liberada. Escolha o destino do núcleo.")
 	return super.interact(command)
 
 func configure(panel: String, argument: int) -> Dictionary:
@@ -64,13 +63,12 @@ func diagnostic() -> String:
 	return "REDE HÍDRICA / %s\nPRESSÃO %d / 60 kPa · CONTAMINAÇÃO %d%%\nCÂMARA %s · MÓDULO %d/2"%["CANAL B" if value("water_route")==1 else "FALHA DE ROTA",pressure(),18 if journey.choices.water=="RESTORE" else 82,"DRENADA" if value("water_drained")==1 else "ALAGADA",value("water_module")]
 
 func objective() -> String:
-	if journey.choices.water!="PENDING":return "Destino registrado. Siga ao transmissor à direita e conclua a jornada."
-	if value("water_route")!=1:return "GAIA: selecione o canal B no roteador e consulte a memória do rio."
+	if journey.choices.water!="PENDING":return "Água: destino registrado. Siga pela saída para o Banco Verde."
+	if value("water_route")!=1:return "GAIA: encontre um caminho de água limpa."
 	if value("water_drained")==0:return "GAIA: autorize a drenagem da câmara inferior."
 	if value("water_module")==0:return "Físico: desça à câmara drenada e recolha o módulo."
 	if value("water_module")==1:return "Físico: instale o módulo na bomba da rua."
-	if pressure()!=60:return "Físico: regule A=2 e B=2 para obter 60 kPa."
+	if pressure()!=60:return "Corpo: ajuste os registros até a faixa segura da bomba."
 	if value("water_authorized")==0:return "GAIA: analise a pressão e autorize o controlador."
 	if value("water_pump")==0:return "Físico: ligue a bomba e observe o reservatório."
-	if value("water_open")==0:return "Físico: abra a comporta Capibaribe."
-	return "Decida o destino da água. Depois transmita o último sinal para ver o final."
+	return "Decida o destino do núcleo e siga para o Banco Verde."

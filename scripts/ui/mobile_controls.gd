@@ -10,6 +10,7 @@ var safe_top := 14.0
 var font: Font
 var browser_touch := false
 var persistence_enabled := true
+var combat_enabled := false
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -55,6 +56,9 @@ func _layout() -> void:
 		"jump":{"rect":Rect2(size.x-safe_margin.x-160,bottom-55,72,72),"text":"^","hint":"SALTAR"},
 		"interact":{"rect":Rect2(size.x-safe_margin.x-78,bottom,78,72),"text":"E","hint":"AGIR"}
 	}
+	if combat_enabled:
+		buttons.erase("perspective")
+		buttons.attack = {"rect":Rect2(size.x-safe_margin.x-242,bottom,72,72),"text":"F","hint":"GOLPE"}
 	queue_redraw()
 
 func _browser_inset(edge: String) -> float:

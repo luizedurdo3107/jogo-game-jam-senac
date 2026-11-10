@@ -14,6 +14,8 @@ var modal_open := false
 var muted := false
 var toast_time := 0.0
 var header: MarginContainer
+var interaction_panel: PanelContainer
+var viewing_memory := false
 
 func _ready() -> void:
 	layer = 20
@@ -37,24 +39,32 @@ func _ready() -> void:
 	columns.add_child(identity)
 	var identity_box := VBoxContainer.new()
 	identity.add_child(identity_box)
-	identity_box.add_child(SignalTheme.label("LAST SIGNAL / EARTH_404", 17, SignalTheme.GOLD))
-	perspective = SignalTheme.label("[F] FÍSICO / RECIFE · 2187", 14)
+	identity_box.add_child(SignalTheme.label("PRESENTE / RECIFE · 2187", 17, SignalTheme.GOLD))
+	perspective = SignalTheme.label("[F] CORPO", 18)
 	identity_box.add_child(perspective)
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	columns.add_child(spacer)
 	var mission := PanelContainer.new()
-	mission.custom_minimum_size.x = 390
+	mission.custom_minimum_size.x = 340
 	columns.add_child(mission)
 	var mission_box := VBoxContainer.new()
 	mission.add_child(mission_box)
-	objective = SignalTheme.label("", 18, SignalTheme.GOLD)
+	objective = SignalTheme.label("", 20, SignalTheme.GOLD)
 	objective.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	objective.custom_minimum_size.x = 350
+	objective.custom_minimum_size.x = 300
 	mission_box.add_child(objective)
-	context = SignalTheme.label("Explore as escadas e os terminais.", 16)
+	context = SignalTheme.label("Aproxime-se para interagir.", 18)
 	context.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	mission_box.add_child(context)
+	context.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	interaction_panel = PanelContainer.new()
+	interaction_panel.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	interaction_panel.offset_left = 160
+	interaction_panel.offset_right = -160
+	interaction_panel.offset_top = -90
+	interaction_panel.offset_bottom = -28
+	root.add_child(interaction_panel)
+	interaction_panel.add_child(context)
 	var utility := HBoxContainer.new()
 	columns.add_child(utility)
 	button(utility,"?",show_help,Vector2(64,64))
@@ -63,7 +73,7 @@ func _ready() -> void:
 	touch.set_script(preload("res://scripts/ui/mobile_controls.gd"))
 	root.add_child(touch)
 	touch.action_started.connect(_touch_action)
-	toast = SignalTheme.label("", 16, SignalTheme.TEAL)
+	toast = SignalTheme.label("", 20, SignalTheme.TEAL)
 	toast.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	toast.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
 	toast.offset_top = 112
@@ -104,17 +114,24 @@ func _ready() -> void:
 func button(parent: Node, text: String, callback: Callable, minimum := Vector2(0,64)) -> Button:
 	var result := Button.new()
 	result.text = text
+	result.tooltip_text = text
+	result.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	result.custom_minimum_size = minimum
+	result.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	result.pressed.connect(callback)
 	parent.add_child(result)
 	return result
 
 func _process(delta: float) -> void:
 	var window_size := DisplayServer.window_get_size()
-	if portrait.visible != (window_size.y>window_size.x):
+	if portrait.visible != (touch.should_show() and window_size.y>window_size.x):
 		_resize()
-	toast_time = maxf(0, toast_time - delta)
-	toast.visible = toast_time > 0
+	if not modal_open:toast_time = maxf(0, toast_time - delta)
+	toast.visible = toast_time > 0 and not modal_open
+	header.visible = not modal_open
+	interaction_panel.visible = not modal_open and not portrait.visible
+	interaction_panel.offset_top = -215 if touch.should_show() else -88
+	interaction_panel.offset_bottom = -153 if touch.should_show() else -26
 	toast.offset_top = header.position.y+header.size.y+10
 	if world:
 		world.player.locked = world.finished or modal_open or portrait.visible
@@ -124,7 +141,7 @@ func _resize() -> void:
 	header.offset_left = touch.safe_margin.x+2
 	header.offset_right = -touch.safe_margin.x-2
 	header.offset_top = touch.safe_top
-	portrait.visible = DisplayServer.window_get_size().y > DisplayServer.window_get_size().x
+	portrait.visible = touch.should_show() and DisplayServer.window_get_size().y > DisplayServer.window_get_size().x
 	if portrait.visible:
 		touch.release_all()
 	call_deferred("_fit_modal")
@@ -134,7 +151,9 @@ func _fit_modal() -> void:
 	modal.position = (root.size-modal.size)*0.5
 
 func _touch_action(action: String) -> void:
-	if action == "interact":
+	if action=="attack" and world.has_method("attack"):
+		world.attack()
+	elif action == "interact":
 		world.try_interact()
 	elif action == "perspective":
 		world.toggle_gaia()
@@ -145,14 +164,17 @@ func notify(text: String) -> void:
 
 func refresh() -> void:
 	objective.text = world.current_objective()
-	perspective.text = "[G] GAIA / ANÁLISE DIGITAL" if GameState.gaia_active else "[F] FÍSICO / RECIFE · 2187"
+	perspective.text = "[Q] GAIA · CIRCUITOS" if GameState.gaia_active else "[Q] CORPO · OBJETOS"
 	perspective.modulate = SignalTheme.TEAL if GameState.gaia_active else SignalTheme.PAPER
 
 func _clear_modal(title: String, text: String) -> void:
+	viewing_memory = false
 	for child in modal_box.get_children():
 		modal_box.remove_child(child)
 		child.queue_free()
-	modal_box.add_child(SignalTheme.label(title,23,SignalTheme.TEAL))
+	var heading := SignalTheme.label(title,23,SignalTheme.TEAL)
+	heading.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	modal_box.add_child(heading)
 	var body := SignalTheme.label(text,22)
 	body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -165,6 +187,10 @@ func _clear_modal(title: String, text: String) -> void:
 	touch.queue_redraw()
 
 func close_modal() -> void:
+	if viewing_memory:
+		world.perspectives.memory.hide()
+		notify("PRESENTE / 2187. O arquivo foi fechado; suas ações continuam no Recife de agora.")
+	viewing_memory = false
 	modal.hide()
 	modal_open = false
 	world.player.locked = portrait.visible
@@ -172,11 +198,26 @@ func close_modal() -> void:
 	touch.queue_redraw()
 
 func show_dialogue(title: String, text: String) -> void:
-	_clear_modal(title,text)
+	_clear_modal("PRESENTE / "+title,text)
 	button(modal_box,"Continuar  [E / Enter]",close_modal).grab_focus()
 
+func show_memory(title: String, text: String) -> void:
+	_clear_modal("PASSADO / "+title,text+"\n\nArquivo reconstruído: você apenas consulta o que aconteceu. Nada aqui muda o passado.")
+	viewing_memory = true
+	button(modal_box,"Fechar arquivo · Voltar ao presente",close_modal).grab_focus()
+
+func show_timeline() -> void:
+	var timeline: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/story/timeline.json"))
+	_clear_modal("ENTENDA A LINHA DO TEMPO","\n\n".join([str(timeline.past),str(timeline.present),str(timeline.future)]))
+	button(modal_box,"Continuar no presente",close_modal).grab_focus()
+
 func show_help() -> void:
-	_clear_modal("DOIS OLHARES. UMA CIDADE.","Corpo: recolhe a célula e move mecanismos.\nGAIA: revela circuitos e autoriza sistemas.\n\nA/D ou < >: mover · Espaço: saltar\nW/S ou ^ v: escadas · E: agir · Q: GAIA\nAmarelo marca os caminhos entre alturas. Sem combate.")
+	if world.region_id=="nova_eden":
+		_clear_modal("NOVA ÉDEN / ARSENAL E COMBATE","Abra o arsenal pela etiqueta dos três relés e pegue o bastão de pulso. Socos não atravessam as armaduras.\n\nA/D: mover · F: bastão · Espaço: esquivar. Três golpes esgotam o fôlego: recue para recuperar. Amarelo avisa; vermelho golpeia. O capitão bloqueia durante a preparação: ataque após o combo.\n\nDifícil: 4 de vida, dois soldados pressionando e combo do capitão. Padrão: 6 de vida e um inimigo por vez. Troque na pausa. Derrotados e arma permanecem no checkpoint.")
+	elif world.region_id=="boss":
+		_clear_modal("TERRA / COMBATE ANTES DO EMBARQUE","O exército de Nova Éden impede a saída para Marte. Enfrente dois soldados e o comandante usando o bastão: F golpeia, Espaço salta; recue para recuperar fôlego. No Difícil, o comandante tem 8 de vida e dois golpes por combo. Ataque na recuperação. Troque a dificuldade na pausa.\n\nVencida a guarnição, use Q/E nos comandos locais para desligar a contenção e confirmar o embarque. GAIA permanece restaurando a Terra: não ajuda a fuga nem é um alvo da luta. Derrotados e travas ficam no checkpoint.")
+	else:
+		_clear_modal("DOIS OLHARES. UMA CIDADE.","Corpo: recolhe a célula e move mecanismos.\nGAIA: revela circuitos e autoriza sistemas.\n\nA/D ou < >: mover · Espaço: saltar\nW/S ou ^ v: escadas · E: agir · Q: GAIA\nAmarelo marca os caminhos entre alturas. Sem combate.")
 	button(modal_box,"Voltar ao Recife",close_modal).grab_focus()
 
 func show_pause() -> void:
@@ -188,6 +229,14 @@ func show_pause() -> void:
 	button(row,"Continuar",close_modal).grab_focus()
 	button(row,"Checkpoint",world.restart)
 	button(row,"Menu",world.menu)
+	if world.region_id in ["nova_eden","boss"]:
+		var difficulty := OptionButton.new()
+		difficulty.add_item("Combate: padrão / 6 de vida")
+		difficulty.add_item("Combate: difícil / 4 de vida + dupla")
+		difficulty.selected = StationJourney.value("nova_difficulty")
+		difficulty.custom_minimum_size.y = 48
+		difficulty.item_selected.connect(func(index: int):world.set_combat_difficulty(index==1))
+		modal_box.add_child(difficulty)
 	var controls := OptionButton.new()
 	controls.add_item("Toque: automático")
 	controls.add_item("Toque: sempre visível")
@@ -200,3 +249,4 @@ func show_pause() -> void:
 	modal_box.add_child(options)
 	button(options,"Áudio / volumes",func():AudioDirector.open_settings(self))
 	button(options,"Gráficos: reduzido / normal",world.toggle_quality)
+	button(modal_box,"Passado, presente e futuro",show_timeline)

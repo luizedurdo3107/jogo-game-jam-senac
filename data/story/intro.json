@@ -1,0 +1,38 @@
+[
+  {
+    "title": "PASSADO / O COLAPSO",
+    "seconds": 7,
+    "image": "res://assets/referencias_aprovadas/09_recife_antigo_2187_identidade_local.png",
+    "text": "Antes desta jornada, a exploração sem limites comprometeu a água, o solo e o ar da Terra."
+  },
+  {
+    "title": "PASSADO / CONTROLE DOS RECURSOS",
+    "seconds": 7,
+    "image": "res://assets/referencias_aprovadas/04_estacao_capibaribe.png",
+    "text": "Corporações passaram a controlar aquilo de que todos precisam para viver."
+  },
+  {
+    "title": "PRESENTE / RECIFE, 2187",
+    "seconds": 7,
+    "image": "res://assets/referencias_aprovadas/01_nova_eden_cidade_artificial.png",
+    "text": "Agora, a NEXUS controla Nova Éden. Fora da cúpula, comunidades ainda tentam recuperar a cidade."
+  },
+  {
+    "title": "PRESENTE / QUEM RESISTE",
+    "seconds": 7,
+    "image": "res://assets/referencias_aprovadas/02_ruinas_recife_antigo.png",
+    "text": "Você vive este momento: anda pelo Recife, conversa e restaura sistemas. A visão digital não muda a época."
+  },
+  {
+    "title": "PRESENTE / A MISSÃO DE GAIA",
+    "seconds": 7,
+    "image": "res://assets/referencias_aprovadas/03_laboratorio_gaia.png",
+    "text": "Kairo e Lyra procuram GAIA, criada para recuperar a Terra. Seus arquivos do passado oferecem pistas, não viagens no tempo."
+  },
+  {
+    "title": "FUTURO / AINDA EM ABERTO",
+    "seconds": 7,
+    "image": "res://assets/referencias_aprovadas/07_complexo_nexus_porto.png",
+    "text": "Recupere as três estações. Depois, escolha ficar com GAIA ou enfrentar o bloqueio de saída para Marte. O final será consequência do que fizer agora."
+  }
+]

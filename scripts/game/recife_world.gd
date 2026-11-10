@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var region_id := "laboratory"
+
 var environment: Node3D
 var player: CharacterBody3D
 var camera: Camera3D
@@ -21,19 +23,26 @@ var audio: AudioStreamPlayer
 var soundscape: Node
 var checkpoint := Vector3(9,0.1,0)
 var perspectives: Node3D
+var carried_cell: MeshInstance3D
 
 func _ready() -> void:
 	GameState.persistence_enabled = false
 	GameState.reset()
 	StationJourney.active = true
-	for flag in StationJourney.INTRO_FLAGS:
+	for flag in StationJourney.INTRO_FLAGS + StationJourney.STORY_FLAGS:
 		if StationJourney.value(flag)==1:GameState.flags[flag] = true
 	GameState.gaia_unlocked = GameState.has_flag("recife_awake")
 	if GameState.has_flag("recife_cell") and not GameState.has_flag("recife_power"):GameState.inventory.append("recife_cell")
 	GameState.input_locked = false
-	data = JSON.parse_string(FileAccess.get_file_as_string("res://data/regions/recife.json"))
+	data = JSON.parse_string(FileAccess.get_file_as_string("res://data/regions/%s.json"%region_id))
 	environment = Node3D.new()
-	environment.set_script(preload("res://scripts/environments/recife_environment.gd"))
+	if region_id=="boss":
+		environment.set_script(preload("res://scripts/environments/departure_environment.gd"))
+	elif region_id=="nova_eden":
+		environment.set_script(preload("res://scripts/environments/nova_environment.gd"))
+	else:
+		environment.set_script(preload("res://scripts/environments/story_environment.gd"))
+		environment.region_id = region_id
 	environment.reduced = OS.has_feature("web") or DisplayServer.is_touchscreen_available()
 	add_child(environment)
 	get_viewport().scaling_3d_scale = 0.75 if environment.reduced else 1.0
@@ -42,6 +51,10 @@ func _ready() -> void:
 	player.world = environment
 	player.position = StationJourney.checkpoint()
 	add_child(player)
+	var cell_shape := BoxMesh.new()
+	cell_shape.size = Vector3(0.24,0.36,0.22)
+	carried_cell = environment.mesh(player,cell_shape,Vector3(-0.3,0.95,-0.05),SignalTheme.TEAL,true)
+	carried_cell.hide()
 	camera = Camera3D.new()
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
 	camera.size = 11.4
@@ -51,7 +64,7 @@ func _ready() -> void:
 	for item in data.objects:
 		objects[item.id] = item
 		_spawn_object(item)
-	_create_lift()
+	if region_id!="nova_eden":_create_lift()
 	_create_drone()
 	perspectives = Node3D.new()
 	perspectives.set_script(preload("res://scripts/game/perspective_controller.gd"))
@@ -74,11 +87,11 @@ func _ready() -> void:
 	hud.set_script(preload("res://scripts/ui/game_hud.gd"))
 	hud.world = self
 	add_child(hud)
-	soundscape = AudioDirector.attach_world(self,"recife",player)
+	soundscape = AudioDirector.attach_world(self,region_id,player)
 	GameState.changed.connect(_refresh)
-	if GameState.has_flag("recife_gate"):environment.open_gate()
 	_refresh()
-	hud.notify("Recife, 2187. Siga à direita e encontre o terminal antigo.")
+	hud.notify(str(data.tutorial))
+	if not StationJourney.checkpoints.has(region_id):hud.show_dialogue(str(data.title),str(data.intro))
 
 func _spawn_object(item: Dictionary) -> void:
 	var root := Node3D.new()
@@ -110,6 +123,12 @@ func _spawn_object(item: Dictionary) -> void:
 		label.pixel_size = 0.007
 		label.modulate = SignalTheme.TEAL if item.get("mode","") == "gaia" else SignalTheme.GOLD
 		root.add_child(label)
+		var detail := Node3D.new()
+		detail.set_script(preload("res://scripts/game/device_detail.gd"))
+		detail.environment = environment
+		detail.item = item
+		detail.world = self
+		root.add_child(detail)
 
 func _create_lift() -> void:
 	lift = AnimatableBody3D.new()
@@ -188,8 +207,11 @@ func _physics_process(delta: float) -> void:
 		lift.position.y = move_toward(lift.position.y,lift_target-0.12,delta*1.6)
 		if absf(lift.position.y-(lift_target-0.12)) < 0.005:
 			lift_moving = false
+	if region_id=="nova_eden":
+		_nova_security(delta)
+		return
 	drone.position = Vector3(20.7+sin(elapsed*0.35)*2.5,3.8,-0.15)
-	if GameState.has_flag("recife_drone"):
+	if GameState.has_flag("recife_drone") or GameState.has_flag("ruins_drone"):
 		drone.position.y = 6.0
 		return
 	var detected := absf(player.position.x-drone.position.x) < 1 and player.position.y > -0.4 and player.position.y < 1.0
@@ -222,6 +244,7 @@ func _update_interactions() -> void:
 		var marker: Node3D = markers[object_id]
 		var gaia_only: bool = item.get("mode","") == "gaia"
 		marker.visible = not gaia_only or GameState.gaia_active
+		if item.get("kind","")=="battery" and GameState.has_flag(str(item.get("done",""))):marker.hide()
 		if not marker.visible:
 			continue
 		if item.get("kind","") == "lift" and not GameState.has_flag("recife_power"):
@@ -241,7 +264,7 @@ func current_objective() -> String:
 	for entry in data.objectives:
 		if not GameState.has_flag(entry[0]):
 			return entry[1]
-	return "Sinal concluído. Obrigado por jogar."
+	return "Siga para a próxima região."
 
 func try_interact() -> void:
 	if hud.modal_open or hud.portrait.visible or finished:
@@ -271,26 +294,29 @@ func interact_object(object_id: String) -> bool:
 		return operate_lift()
 	if item.get("kind","") == "exit":
 		hud.touch.release_all()
-		StationJourney.start_stations()
-		return true
+		if region_id=="nova_eden":
+			StationJourney.put("nova_escaped",1)
+		if StationJourney.advance_story():return true
+		hud.notify("Não foi possível salvar a passagem. Tente novamente.")
+		return false
 	var effect: Dictionary = item.get("effect",{}).duplicate(true)
 	if item.has("take_item"):
 		effect.take_item = item.take_item
 	GameState.apply_effect(effect)
 	_save_progress()
-	if object_id == "gate":
-		environment.open_gate()
 	soundscape.interaction(object_id,str(item.get("kind","")),GameState.gaia_active,markers[object_id].global_position)
 	if item.has("text"):
-		if object_id=="archive":perspectives.show_memory("water",Vector3(item.at[0],item.at[1],0))
-		hud.show_dialogue(str(item.label),str(item.text))
+		if item.get("temporal","")=="past" or object_id=="archive":
+			perspectives.show_memory("lab" if region_id=="laboratory" else "recife",Vector3(item.at[0],item.at[1],0))
+			hud.show_memory(str(item.label),str(item.text))
+		else:hud.show_dialogue(str(item.label),str(item.text))
 	return true
 
 func toggle_gaia() -> bool:
 	if hud.modal_open or hud.portrait.visible or finished:
 		return false
 	if not GameState.gaia_unlocked:
-		hud.notify("Encontre primeiro o terminal antigo para despertar GAIA.")
+		hud.notify("GAIA será encontrada no laboratório. Explore com o corpo por enquanto.")
 		return false
 	GameState.gaia_active = not GameState.gaia_active
 	_refresh()
@@ -298,12 +324,17 @@ func toggle_gaia() -> bool:
 	return true
 
 func _refresh() -> void:
+	if not is_inside_tree():return
+	if carried_cell:
+		carried_cell.visible = region_id=="laboratory" and GameState.has_flag("recife_cell") and not GameState.has_flag("recife_power")
 	if environment:
 		environment.set_gaia(GameState.gaia_active)
+		if GameState.has_flag(str(data.get("gate_flag",""))) and environment.gate.collision_layer!=0:environment.open_gate()
 	if perspectives and perspectives.active!=GameState.gaia_active:
 		perspectives.set_active(GameState.gaia_active)
 	if hud:
 		hud.refresh()
+		hud.perspective.text = ("[Q] GAIA" if GameState.gaia_active else "CORPO")+" / "+str(data.get("region","RECIFE"))
 		_update_interactions()
 
 func operate_lift() -> bool:
@@ -326,7 +357,7 @@ func operate_lift() -> bool:
 	return true
 
 func _save_progress() -> void:
-	for flag in StationJourney.INTRO_FLAGS:
+	for flag in StationJourney.INTRO_FLAGS + StationJourney.STORY_FLAGS:
 		StationJourney.put(flag,1 if GameState.has_flag(flag) else 0)
 	if player.is_on_floor() and not player.climbing:
 		var point := player.position
@@ -350,13 +381,43 @@ func toggle_quality() -> void:
 
 func restart() -> void:
 	hud.touch.release_all()
-	get_tree().reload_current_scene()
+	SceneRouter.change_scene(scene_file_path)
+
+func _nova_security(delta: float) -> void:
+	var escaping := GameState.has_flag("nova_open")
+	if escaping:
+		drone.position.x = move_toward(drone.position.x,player.position.x,delta*2.7)
+		drone.position.y = 1.8
+	else:
+		drone.position.x = 18.5+sin(elapsed*0.6)*2.4
+		drone.position.y = 3.1
+	if grace>0:return
+	var detected := absf(player.position.x-drone.position.x)<0.85 and player.position.y<1.1 and player.position.y>-0.4
+	suspicion = minf(1.5,suspicion+delta) if detected else maxf(0,suspicion-delta*2)
+	if suspicion>0.45:hud.notify("NEXUS: inspeção. Suba à passarela ou siga para a saída!")
+	if suspicion>=1.5:_capture()
+
+func _capture() -> void:
+	finished = true
+	player.locked = true
+	hud.touch.release_all()
+	var fall := create_tween()
+	fall.set_parallel(true)
+	fall.tween_property(player.sprite,"rotation:z",-0.8,0.7)
+	fall.tween_property(player.sprite,"modulate",Color(0.45,0.45,0.55,0.65),0.7)
+	await fall.finished
+	if not is_inside_tree():return
+	hud._clear_modal("DERROTADO EM NOVA ÉDEN","O exército impediu sua fuga. Retome o confronto: soldados já derrotados permanecem no checkpoint. Aproxime-se para golpear e salte ou recue antes do ataque vermelho.")
+	hud.button(hud.modal_box,"Reiniciar jornada",func():StationJourney.enter(false)).grab_focus()
+	hud.button(hud.modal_box,"Retomar o combate",restart)
+	hud.button(hud.modal_box,"Menu",menu)
 
 func menu() -> void:
 	hud.touch.release_all()
 	SceneRouter.menu()
 
 func _exit_tree() -> void:
+	if GameState.changed.is_connected(_refresh):GameState.changed.disconnect(_refresh)
 	if is_instance_valid(audio):
 		audio.stop()
 		audio.stream = null

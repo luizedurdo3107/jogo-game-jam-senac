@@ -10,7 +10,7 @@ var gaia_unlocked := false
 var gaia_active := false
 var flags: Dictionary = {}
 var values: Dictionary = {}
-var station_choices: Dictionary = {"water": "PENDING"}
+var station_choices: Dictionary = {"water":"PENDING","soil":"PENDING","air":"PENDING"}
 var inventory: Array = []
 var input_locked := false
 var volume := 0.45
@@ -28,6 +28,11 @@ func _ready() -> void:
 			var event := InputEventKey.new()
 			event.physical_keycode = key
 			InputMap.action_add_event(action, event)
+	if not InputMap.has_action("attack"):
+		InputMap.add_action("attack")
+		var strike := InputEventKey.new()
+		strike.physical_keycode = KEY_F
+		InputMap.action_add_event("attack",strike)
 	var settings := ConfigFile.new()
 	if settings.load(SETTINGS_PATH) == OK:
 		set_volume(float(settings.get_value("audio", "volume", 0.45)), false)
@@ -41,7 +46,7 @@ func reset() -> void:
 	flags.clear()
 	values.clear()
 	inventory.clear()
-	station_choices = {"water":"PENDING"}
+	station_choices = {"water":"PENDING","soil":"PENDING","air":"PENDING"}
 	input_locked = false
 	changed.emit()
 

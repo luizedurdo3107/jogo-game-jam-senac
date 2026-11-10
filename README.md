@@ -1,102 +1,87 @@
-# LAST SIGNAL: EARTH_404 — Campanha Curta 2.5D Mobile
+# LAST SIGNAL: EARTH_404 — Jornada restaurada 2.5D
 
-Aventura narrativa sem combate, feita em **Godot 4 / GDScript**. Recife, 2187: o corpo manipula equipamentos, enquanto GAIA revela circuitos, diagnósticos e memórias.
+Godot **4.7.2**, exclusivamente GDScript. Recife, 2187: sete regiões compactas, combates contra o exército na cidade e antes da partida para Marte, três desafios ambientais e dois finais. Edição **1.1.0-rc5**, candidata à apresentação, ainda dependente de playtest humano.
 
-Esta é a **única versão ativa do projeto**. O menu, o salvamento e a exportação não oferecem mais o jogo 2D, uma prova de conceito ou demos separadas.
+## Jogar
 
-## Jornada
-
-**Duas fases jogáveis: Recife Antigo → Estação Capibaribe → final.**
-
-- Cenários com geometria e colisões 3D, câmera lateral e personagem original em AnimatedSprite3D.
-- Recife: descoberta de GAIA, circuito superior, célula subterrânea e abertura da passagem.
-- Capibaribe: drenagem, transporte de módulo, duas válvulas e pressão segura.
-- No Capibaribe, escolha restaurar a água da comunidade ou reservar o núcleo para a ARCA-01.
-- O transmissor no fim da segunda fase abre uma confirmação e leva diretamente ao epílogo. Não exige Banco Verde, Atmos ou NEXUS.
-- A escolha da água determina um dos dois desfechos completos, com narrativa de encerramento e botão de retorno ao menu.
-- Checkpoints, progresso técnico, volumes e preferências de toque locais ao dispositivo.
-
-## Jogar / editar
-
-Abra `project.godot` com **Godot 4.7.2**, versão usada nos testes, e pressione **F5** para iniciar a jornada pelo menu.
-
-Cena inicial: `scenes/ui/main_menu.tscn`.
-
-No terminal:
+Abra `project.godot` na Godot 4.7.2 e pressione F5. A cena inicial é `scenes/ui/main_menu.tscn`.
 
 ```sh
-godot --path .
+flatpak run org.godotengine.Godot --path .
 ```
 
-Neste computador a instalação disponível é Flatpak: substitua `godot` por `flatpak run org.godotengine.Godot`.
+A/D ou setas: andar; Espaço: saltar/esquivar; F: golpear nos dois combates (pode segurar); W/S: escadas; E: interagir; Q: corpo/GAIA; Tab: pistas; Esc: pausa. A introdução pode ser pulada. Toque é opcional e configurável na pausa; durante as batalhas, GOLPE substitui GAIA e a análise retorna depois da vitória. Há violência estilizada contra soldados humanos, com dano e queda, sem sangue ou gore.
 
-### Controles
+O menu usa a arte aprovada do Recife em tela cheia, iluminação ciano/magenta, animação ambiente discreta e navegação por teclado/toque. Continuar reconhece o progresso salvo; iniciar outra jornada pede confirmação. Áudio e créditos permanecem acessíveis.
 
-| Ação | Teclado | Celular |
-|---|---|---|
-| Mover | A/D ou setas | esquerda / direita |
-| Escadas | W/S ou cima/baixo | subir / descer |
-| Saltar | Espaço | saltar |
-| Interagir | E | agir |
-| Corpo / GAIA | Q | GAIA |
-| Ajuda | Tab, J ou M | ? |
-| Pausa | Esc | pausa |
+## Progressão real
 
-Use o celular na horizontal. Toques simultâneos são suportados. O jogo libera os botões ao perder foco, abrir diálogos ou girar para retrato. Se a detecção automática falhar, selecione **Pausa → Toque: sempre visível**. A escolha fica salva.
+1. **Nova Éden:** avenida futurista 2.5D com skyline, néon e tráfego; soldados humanos ilustrados, com quatro poses e capitão distinto. Abra o arsenal seguindo a etiqueta dos relés, pegue o bastão com E e enfrente a patrulha com F. Fôlego limita ataques; recue ou salte para esquivar. Difícil é o padrão: 4 de vida, pressão de dupla, inimigos mais resistentes e combo do capitão. Padrão na pausa: 6 de vida e um inimigo ativo. Arma, dificuldade, relés e derrotados persistem; vencer abre a saída.
+2. **Recife Antigo:** Nara, bomba comunitária, memória local, passarela, túnel, inspeção desviável e acesso ao laboratório.
+3. **Laboratório GAIA:** origem e prioridade de preservação da IA; circuitos superiores, transporte físico de célula, autorização digital e comporta.
+4. **Capibaribe:** escolher água tratada, drenar uma câmara, transportar módulo, ajustar válvulas e acionar bomba/comporta.
+5. **Banco Verde:** filtro, seleção de sementes saudáveis, clima e irrigação da estufa.
+6. **Torre Atmos:** cooperação com a técnica, elevador de quatro níveis e estágios de ventilação em ordem.
+7. **NEXUS / Porto:** diálogo com Voss e decisão definitiva; não há outra sequência de condutores, travas ou autorização de porta.
 
-Em retrato, a jogabilidade aguarda a rotação; menus continuam acessíveis. Diálogos extensos têm rolagem. Os finais mantêm o botão de retorno visível.
+As três alocações de recursos continuam registradas. **A maioria não escolhe mais o final pelo jogador.** Ficar na Terra inicia a recuperação com apoio de GAIA, sem confronto. Tentar sair da Terra rumo a Marte leva à doca bloqueada pelo **exército de Nova Éden**: enfrente dois soldados e o comandante usando o bastão. No Difícil, os inimigos têm 4/5/8 pontos de vida, pressão de dupla e combo do comandante; Kairo tem 4 de vida. Padrão oferece 6 de vida e inimigos com 3/3/6, selecionável na pausa. Inimigos vencidos persistem no checkpoint. Se um save antigo não tiver arma, há um bastão na doca, sem outro puzzle.
 
-## Exportar para navegador mobile
+Depois da vitória militar, desligue a contenção de embarque pelos três comandos locais e confirme a partida. Não é possível embarcar apenas pulando os inimigos ou operando os painéis antes da luta. GAIA não é alvo nem controla os soldados: continua ajudando a recuperar a Terra, não a abandoná-la. Só depois vêm embarque, decolagem, travessia, chegada a Marte e primeiro contato amistoso com os Auri fictícios.
 
-Instale os templates de exportação da mesma versão da Godot.
+**ARCA-01 e espaço:** a nave agora compartilha o mesmo modelo no porto, na doca e no epílogo: fuselagem afilada, cockpit, asas, janelas, motores animados e trem de pouso recolhido durante o voo. A câmera acompanha a decolagem. A Terra tem oceanos, continentes estilizados, calotas, nuvens em rotação independente e halo atmosférico. São geometria e texturas procedurais em GDScript, não fotografias ou serviços externos. Artes originais preservadas.
+
+**Passado, presente e futuro:** arquivos históricos têm identificação própria e são apenas consultados; a ação jogável acontece no Recife de 2187; os finais mostram consequências posteriores. Q muda a perspectiva do mesmo momento, não permite viagem no tempo. O guia está disponível na pausa. Diálogos ao vivo de Voss e GAIA não são tratados como memórias.
+
+O pedido mais recente acrescenta **um puzzle de arsenal** à primeira fase. Agora são três desafios explícitos de abertura na campanha: arsenal, tutorial do laboratório e contenção antes de Marte. Não foram acrescentadas outras fechaduras. Recife e estações liberam as passagens automaticamente ao cumprir o objetivo ambiental.
+
+Por solicitação expressa do responsável, a fuga inicial agora tem violência contra pessoas. Cooperação e resolução pacífica permanecem nas demais áreas; não se afirma mais ausência de combate no jogo inteiro. A elegibilidade dessa exceção para a carta Paz e Amor deve ser confirmada pela equipe com a organização da Jam.
+
+## Origem e preservação
+
+Base restaurada: commit `c35d329`, anterior à redução `998387d`. Essa base tinha **cinco regiões 3D**, não sete. Nova Éden e a parte narrativa do laboratório foram adaptadas dos backups legados, principalmente `work/pre_station_redesign/`, sem recriar o projeto.
+
+Backup integral anterior à restauração: `work/restoration_20261109_before/`, incluindo alterações não commitadas e `history.bundle`. A candidata rc1 fica em `work/restoration_20261109_validated/`; a revisão narrativa rc2, em `work/restoration_20261109_narrative_v5/`. Diretórios `work/` são locais, ignorados e não entram nas exportações.
+
+O personagem original e os vídeos são preservados. A caminhada usa 12 quadros extraídos do vídeo de 09/11 em `assets/processados/movimento_20261109/`; o idle anterior permanece intacto. Saltos e escadas utilizam poses: não há fonte para ciclos dedicados. O áudio do vídeo não é redistribuído no jogo.
+
+## Salvamentos
+
+Novo arquivo: `user://last_signal_restored_v6.json`, com validação de estados, limites, dependências, escolhas e checkpoints, gravado por substituição atômica. Os arquivos v1–v5 não são sobrescritos.
+
+- v1/v2 preservam os três núcleos e progresso técnico; um final antigo retorna ao NEXUS para uma nova decisão explícita.
+- v3 preserva água e progresso do antigo tutorial, agora no laboratório; Banco Verde e Atmos continuam pendentes.
+- v4 preserva regiões, recursos e decisões. O antigo confronto da Terra dá lugar ao final de restauração; um final de Marte já concluído continua concluído, sem inventar um confronto retroativo. Novas partidas exigem superar a contenção antes de embarcar para Marte.
+- v5 preserva regiões, decisões e uma saída de Nova Éden já conquistada, sem inventar uma briga retroativa. Se a saída ainda estava bloqueada, a coleta inicial obsoleta é descartada e o jogador começa o novo combate em posição segura. Soldados derrotados na v6 permanecem derrotados ao continuar.
+- Arquivos corrompidos são recusados. Saves 2D não são importados.
+- A rc4 estende o save v6 com arma, relés e dificuldade, sem trocar o arquivo. Partidas rc3 que já derrotaram algum soldado recebem o bastão para não perder progresso. Partidas sem vitória e com checkpoint avançado voltam à área segura do arsenal. Uma saída já conquistada não é bloqueada novamente.
+- A rc5 acrescenta `departure_started`, `departure_security` e `departure_legacy_clear` à v6. Novas escolhas de Marte exigem a vitória militar. Finais anteriores e uma doca rc4 com todas as travas já desligadas não ganham combate retroativo; progresso técnico parcial permanece e passa a exigir a guarnição. Checkpoints antigos dentro da arena voltam à área segura se a nova luta ainda não começou.
+- Cenas do editor não contêm o progresso do jogador. Uma Godot já aberta pode mostrar buffers antigos: recarregue arquivos externos antes de salvar.
+
+## Exportação
 
 ```sh
-mkdir -p outputs/web
-godot --headless --path . --export-release "Web Mobile" outputs/web/index.html
-python3 -m http.server 8000 --bind 0.0.0.0 --directory outputs/web
+mkdir -p outputs/web outputs/linux
+flatpak run org.godotengine.Godot --headless --path . --export-release Web outputs/web/index.html
+flatpak run org.godotengine.Godot --headless --path . --export-release Linux outputs/linux/LAST_SIGNAL_EARTH404.x86_64
+python3 -m http.server 8086 --bind 0.0.0.0 --directory outputs
 ```
 
-Abra `http://localhost:8000` no computador. Para acesso pelo celular, publique **todos** os arquivos de `outputs/web/` em uma hospedagem estática HTTPS, com MIME `application/wasm` para o WASM. Não abra `index.html` como arquivo local. HTTP em IP de rede não substitui HTTPS para os recursos seguros do navegador.
+Web: `http://localhost:8086/web/index.html`. Compatibility/WebGL 2, thread única, sem backend ou serviços externos de jogabilidade. Não abra o HTML pelo gerenciador de arquivos.
 
-O preset é **Compatibility / WebGL 2 / thread única**, com renderização 3D reduzida no Web. Não há APK, backend, login, IA remota ou dependência de serviços externos durante a partida carregada. A primeira carga requer rede ou servidor local.
-
-Os binários exportados ficam fora do Git; este repositório contém o projeto-fonte e os recursos necessários para reconstruí-los. Não foi criado ZIP. O commit no GitHub não publica automaticamente um site.
-
-## Organização
-
-| Diretório | Conteúdo |
-|---|---|
-| `scenes/regions/` | duas fases 2.5D e epílogo |
-| `scenes/ui/` | único menu inicial |
-| `scripts/core/` | sessão, jornada/salvamento e navegação |
-| `scripts/game/` | personagem, perspectivas e controle dos cenários |
-| `scripts/environments/` | construção dos ambientes 3D |
-| `scripts/puzzles/` | regras do puzzle Capibaribe |
-| `scripts/ui/` | HUDs, toque, créditos e tema |
-| `scripts/audio/` | mixagem, ambiente, fontes e passos |
-| `data/regions/` | interações e configuração das regiões |
-| `data/story/` | decisões e finais |
-| `assets/` | artes originais, referências e recursos de execução |
-| `tests/` | regressões da jornada 2.5D/mobile |
-| `tools/` | importação, análise sonora e shell Web |
-| `outputs/` | evidências de validação e exportações locais ignoradas |
-
-A versão 2D anterior e materiais de trabalho foram preservados **somente no backup local ignorado** `work/legacy_source/` e `work/pre_mobile_unification/`. A antiga campanha de cinco fases também está preservada no histórico Git e em `work/short_campaign_before/`. Esses backups não fazem parte do projeto ativo, exportação ou commit. Os documentos históricos em `docs/especificacoes/` são referências de escopo, não descrições do estado atual.
-
-## Salvamento
-
-A campanha curta usa `user://last_signal_short_v3.json`, validado e gravado por substituição atômica. Na ausência dele, importa `last_signal_mobile_v2.json` ou `stations_25d_v1.json`, sem sobrescrever esses arquivos.
-
-A migração conserva o progresso do Recife e do Capibaribe e o destino da água. Quem estava no Banco Verde, Atmos, NEXUS ou em um final antigo retorna ao Capibaribe para conferir e transmitir o sinal: as fases removidas deixam de ser pré-requisitos. O antigo final por maioria de três núcleos não é reinterpretado silenciosamente; a nova conclusão só aparece após confirmação, baseada na escolha da água. O save 2D não é lido nem sobrescrito.
-
-**Nova jornada** pede confirmação quando há progresso válido. **Continuar** volta à região/etapa salva, inclusive ao epílogo.
+Linux: `outputs/linux/LAST_SIGNAL_EARTH404.x86_64`. Binários, vídeos e capturas são entregas locais e ficam fora do Git. Pacotes ZIP de revisões anteriores não são atualizados nesta revisão; o código é trabalhado e enviado diretamente pelo repositório. Publicação em hospedagem externa não é automática.
 
 ## Testes e limites
 
-Veja `docs/VALIDACAO.md` para comandos, resultados e verificação manual em celulares. As capturas em `outputs/SHORT_25D_*.png` são da execução real da Godot/navegador, não imagens promocionais.
+Regressões em `tests/`: persistência/migração, cenas reais e dois finais, percurso físico nas três estações, interfaces, escadas/elevadores, toque sintético, caminhada, fuga/captura, confronto e distinção entre arquivos históricos e diálogos atuais (`timeline_test`). Exemplo:
 
-Esta edição reduz a aventura de cinco para **duas fases exploráveis e um epílogo**, mantendo um começo, puzzle e encerramento. Banco Verde, Atmos e NEXUS não estão no roteiro nem na exportação de cenas. **Nova Éden e o laboratório GAIA não são fases 3D independentes** nesta edição. A apresentação é low-poly, orientada pelas referências, não uma reprodução fotorrealista das imagens. O personagem conserva os oito quadros fornecidos; não foram inventados ciclos dedicados adicionais. Música final e dublagem humana permanecem pendentes. Não há garantia de 30 FPS em aparelhos físicos nem validação universal de Android/iOS.
+```sh
+flatpak run org.godotengine.Godot --headless --path . --fixed-fps 60 res://tests/flow_test.tscn
+```
 
-## Créditos e direitos
+Revisão atual: `docs/FINAL_RC5.md`, incluindo o novo `departure_test`. Históricos: `docs/NOVA_EDEN_RC4.md`, `docs/COMBATE_NOVA_EDEN.md` e `docs/RESTAURACAO_E_QA.md`. Testes automatizados e operação por agente **não substituem playtest humano**. Não há certificação de Android/iOS físicos, nem garantia universal de desempenho. O panorama e atlas de Nova Éden são suplementares gerados por IA; as artes originais e o protagonista foram preservados. As quatro poses do soldado não constituem um ciclo de animação completo. Música final e dublagem humana não foram fornecidas. Sons procedurais originais, sem TTS, com volumes independentes.
 
-Godot Engine e seus componentes: avisos em `LICENSES/` e `THIRD_PARTY_NOTICES.txt`. Personagem e referências foram fornecidos pelo responsável pelo projeto; os originais são preservados, sem presumir uma nova licença de redistribuição. O áudio procedural original e suas origens estão documentados em `assets/audio/ORIGEM_E_LICENCA.md`. A licença da engine não licencia automaticamente as artes ou o jogo.
+## Organização e direitos
+
+`scenes/regions/`: sete regiões, confronto e epílogo. `scenes/story/`: introdução. `scripts/`: gameplay, ambientes, puzzles, UI e áudio. `data/`: narrativa/configurações JSON. `assets/`: originais e recursos processados. `tools/`: importadores e shell Web. `outputs/`: entregas e evidências locais.
+
+Godot e componentes: `LICENSES/` e `THIRD_PARTY_NOTICES.txt`. Artes e personagem foram fornecidos pelo responsável; a equipe deve confirmar os direitos para publicação. A licença da engine não licencia automaticamente o jogo. O envio desta revisão ao GitHub foi solicitado expressamente pelo responsável após a validação.

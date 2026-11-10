@@ -21,7 +21,7 @@ static func box(color: Color, border: Color = Color("474252"), margin := 14) -> 
 
 static func create() -> Theme:
 	var result: Theme = preload("res://assets/processados/interface/industrial_theme.tres").duplicate(true)
-	result.default_font_size = 17
+	result.default_font_size = 20
 	result.set_color("font_color", "Label", PAPER)
 	result.set_color("font_color", "Button", PAPER)
 	result.set_color("font_hover_color", "Button", TEAL)

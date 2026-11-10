@@ -1,0 +1,71 @@
+{
+  "earth": [
+    {
+      "title": "DEPOIS DA ESCOLHA / FICAR NA TERRA",
+      "text": "GAIA: vou ajudar vocês a recuperar a Terra. As estações são o começo. Juntos, podemos devolver água, solo e ar às comunidades.",
+      "seconds": 6
+    },
+    {
+      "title": "DIAS DEPOIS / ÁGUA QUE VOLTA",
+      "text": "As primeiras bombas retomam o curso do Capibaribe. A comunidade escolhe onde começar.",
+      "seconds": 6
+    },
+    {
+      "title": "SEMANAS DEPOIS / O PRIMEIRO BROTO",
+      "text": "Nem tudo floresce hoje. Nara, Lyra e Kairo ficam para o trabalho de amanhã.",
+      "seconds": 6
+    },
+    {
+      "title": "O FUTURO EM CONSTRUÇÃO / TERRA",
+      "text": "Não foi o último sinal da Terra. Foi o primeiro de uma nova escuta.",
+      "seconds": 6
+    }
+  ],
+  "legacy_mars_opening": {
+    "title": "DEPOIS DA ESCOLHA / EMBARQUE",
+    "text": "Esta partida já estava concluída no seu progresso anterior. Kairo e Lyra seguem para Marte. GAIA permanece na Terra, ajudando a comunidade.",
+    "seconds": 4.5
+  },
+  "mars": [
+    {
+      "title": "DEPOIS DO CONFRONTO / EMBARQUE",
+      "text": "Depois de vencer a guarnição de Nova Éden e desligar a contenção por comandos locais, Kairo e Lyra embarcam. GAIA permanece na Terra, ajudando a comunidade.",
+      "seconds": 4.5
+    },
+    {
+      "title": "DEPOIS DO EMBARQUE / DECOLAGEM",
+      "text": "A ARCA-01 deixa o Porto do Recife. Não levam apenas sementes: levam responsabilidade.",
+      "seconds": 4.5
+    },
+    {
+      "title": "A TERRA À DISTÂNCIA",
+      "text": "O planeta fica pequeno na janela. Sua história não desaparece com a distância.",
+      "seconds": 6
+    },
+    {
+      "title": "DURANTE A TRAVESSIA",
+      "text": "A viagem leva tempo. Enquanto a tripulação cuida da ARCA, GAIA continua trabalhando na recuperação do Recife.",
+      "seconds": 4.5
+    },
+    {
+      "title": "MESES DEPOIS / CHEGADA A MARTE",
+      "text": "Após a travessia, a ARCA encontra um vale protegido. Há luzes onde não esperavam.",
+      "seconds": 4.5
+    },
+    {
+      "title": "NÃO ESTAMOS SÓS",
+      "text": "Uma civilização fictícia, os Auri, recebe o sinal. Eles se aproximam sem armas.",
+      "seconds": 4.5
+    },
+    {
+      "title": "EM MARTE / PRIMEIRO CONTATO",
+      "text": "Kairo oferece uma semente, não uma bandeira. Os Auri respondem com água.",
+      "seconds": 4.5
+    },
+    {
+      "title": "O FUTURO EM CONSTRUÇÃO / CONVIVÊNCIA",
+      "text": "Humanos e Auri cultivam o primeiro jardim juntos. Recomeçar é aprender a conviver.",
+      "seconds": 5
+    }
+  ]
+}

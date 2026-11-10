@@ -4,3 +4,4 @@
 
 [node name="RecifeAntigo" type="Node3D"]
 script = ExtResource("1")
+region_id = "recife"

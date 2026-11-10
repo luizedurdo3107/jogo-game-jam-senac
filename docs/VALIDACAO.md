@@ -1,5 +1,7 @@
 # Validação da campanha curta 2.5D/mobile
 
+Registro histórico da edição anterior, commit 998387d. A validação da jornada restaurada está em `RESTAURACAO_E_QA.md`; os resultados desta página não certificam a edição atual.
+
 Ambiente: Godot 4.7.2 Flathub, Compatibility, Intel Iris Xe/Mesa. Web: Chromium do navegador integrado, WebGL 2, viewport 844×390. Não é um celular físico.
 
 ## Regressões

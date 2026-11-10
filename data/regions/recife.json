@@ -1,6 +1,9 @@
 {
-  "title": "01 / RECIFE ANTIGO · DESPERTAR DE GAIA",
-  "region": "Recife Antigo · 2187",
+  "title": "02 / RUÍNAS DO RECIFE ANTIGO",
+  "region": "Recife Antigo · Marco Zero",
+  "gate_flag": "ruins_gate",
+  "intro": "Fora da cúpula, o Recife resiste. Nara cuida da comunidade junto ao Capibaribe. Uma antiga estufa esconde o acesso ao laboratório.",
+  "tutorial": "Explore rua, passarela e túnel. W/S: subir e descer escadas.",
   "objects": [
     {
       "id": "nara",
@@ -8,158 +11,56 @@
         4,
         0
       ],
-      "kind": "npc",
       "label": "NARA · COMUNIDADE",
-      "text": "A maré levou quase tudo. O terminal antigo pode abrir o caminho à Casa das Águas. Recupere a passagem e depois reative a bomba do Capibaribe. A comunidade precisa de água; a ARCA-01 também aguarda reservas."
-    },
-    {
-      "id": "terminal",
-      "at": [
-        8,
-        0
-      ],
-      "label": "01 · DESPERTAR GAIA",
+      "kind": "npc",
+      "mode": "physical",
+      "done": "ruins_contact",
       "effect": {
         "flags": [
-          "recife_awake"
-        ],
-        "unlock_gaia": true
-      },
-      "done": "recife_awake",
-      "text": "GAIA: consigo revelar os circuitos que seus olhos não veem. Ative Q / GAIA. Suba a escada à direita e examine o circuito da passarela."
-    },
-    {
-      "id": "scan",
-      "at": [
-        14.8,
-        2.6
-      ],
-      "label": "02 · CIRCUITO OCULTO",
-      "mode": "gaia",
-      "requires": {
-        "recife_awake": true
-      },
-      "effect": {
-        "flags": [
-          "recife_scan"
+          "ruins_contact"
         ]
       },
-      "done": "recife_scan",
-      "text": "GAIA: o cabo está rompido. Há uma célula na sala abaixo da rua. Volte ao mundo FÍSICO para recolhê-la. As escadas amarelas conectam os níveis."
+      "requires": {},
+      "text": "Nara: a água parou nas casas. Reabra a bomba à direita e eu libero o caminho ao laboratório. A cidade ainda vive aqui."
     },
     {
-      "id": "cell",
+      "id": "water_repair",
       "at": [
-        17,
-        -2.7
-      ],
-      "label": "03 · CÉLULA DE ENERGIA",
-      "kind": "battery",
-      "requires": {
-        "recife_scan": true
-      },
-      "blocked": "Antes, examine o circuito da passarela com GAIA. A célula só pode ser transportada pelo corpo.",
-      "effect": {
-        "flags": [
-          "recife_cell"
-        ],
-        "give_item": "recife_cell"
-      },
-      "done": "recife_cell",
-      "text": "Célula recolhida. Siga pelo túnel até a escada da direita. O soquete está na rua, acima de você."
-    },
-    {
-      "id": "socket",
-      "at": [
-        21.7,
+        9,
         0
       ],
-      "label": "04 · SOQUETE DA BOMBA",
-      "requires": {
-        "recife_scan": true,
-        "recife_cell": true
-      },
-      "requires_item": "recife_cell",
-      "blocked": "Falta a célula do arquivo subterrâneo. Primeiro diagnostique o circuito da passarela com GAIA.",
+      "label": "BOMBA COMUNITÁRIA",
+      "kind": "terminal",
+      "mode": "physical",
+      "done": "ruins_water",
       "effect": {
         "flags": [
-          "recife_power"
+          "ruins_water",
+          "ruins_gate"
         ]
       },
-      "take_item": "recife_cell",
-      "done": "recife_power",
-      "text": "Bomba energizada. Falta a autorização digital: use GAIA no painel junto à comporta. O elevador também voltou a funcionar."
-    },
-    {
-      "id": "authorize",
-      "at": [
-        25.7,
-        0
-      ],
-      "label": "05 · AUTORIZAÇÃO GAIA",
-      "mode": "gaia",
       "requires": {
-        "recife_power": true
+        "ruins_contact": true
       },
-      "blocked": "Circuito sem energia. Encaixe a célula no soquete à esquerda, no mundo físico.",
-      "effect": {
-        "flags": [
-          "recife_authorized"
-        ]
-      },
-      "done": "recife_authorized",
-      "text": "GAIA: autorização registrada. Eu leio os sistemas; você move o mundo. Volte ao FÍSICO e abra a comporta."
-    },
-    {
-      "id": "gate",
-      "at": [
-        27,
-        0
-      ],
-      "label": "06 · ABRIR COMPORTA",
-      "requires": {
-        "recife_authorized": true
-      },
-      "blocked": "A comporta exige energia física e autorização digital. Duas perspectivas, um único caminho.",
-      "effect": {
-        "flags": [
-          "recife_gate"
-        ]
-      },
-      "done": "recife_gate",
-      "text": "Passagem aberta. Siga à direita até a Estação Capibaribe, a última fase. Lá você escolherá o destino da água e transmitirá o último sinal para concluir a jornada."
-    },
-    {
-      "id": "exit",
-      "at": [
-        32,
-        0
-      ],
-      "label": "07 · SEGUIR AO CAPIBARIBE",
-      "kind": "exit",
-      "requires": {
-        "recife_gate": true
-      },
-      "blocked": "Abra a comporta antes de acessar a distribuição de energia."
+      "text": "A bomba voltou a circular. Nara já liberou a passagem: siga para o laboratório à direita. Não precisa procurar uma chave ou outro painel."
     },
     {
       "id": "archive",
       "at": [
-        20,
+        15,
         2.6
       ],
-      "label": "MEMÓRIA OPCIONAL · MARCO ZERO",
-      "mode": "gaia",
-      "requires": {
-        "recife_awake": true
-      },
+      "label": "MEMÓRIA · MARCO ZERO",
+      "kind": "terminal",
+      "mode": "physical",
+      "done": "ruins_memory",
       "effect": {
         "flags": [
-          "recife_archive"
+          "ruins_memory"
         ]
       },
-      "done": "recife_archive",
-      "text": "Arquivo recuperado: aqui se encontravam rios, pontes e pessoas. Nem o colapso conseguiu apagar a cidade. Memória do Marco Zero preservada."
+      "requires": {},
+      "text": "Ponte Maurício de Nassau, Rua do Bom Jesus, Torre Malakoff. Sob o concreto, as raízes do mangue ainda seguram a margem."
     },
     {
       "id": "maintenance",
@@ -167,71 +68,45 @@
         18.4,
         2.6
       ],
-      "label": "DRONE · ROTA DE MANUTENÇÃO",
+      "label": "REDIRECIONAR INSPEÇÃO",
+      "kind": "terminal",
+      "mode": "physical",
+      "done": "ruins_drone",
       "effect": {
         "flags": [
-          "recife_drone"
+          "ruins_drone"
         ]
       },
-      "done": "recife_drone",
-      "text": "Drone encaminhado à doca técnica, sem dano. A rua está livre. Paz e Amor: investigar e restaurar, nunca combater."
+      "requires": {},
+      "text": "Drone encaminhado à doca de manutenção. Nenhum equipamento foi destruído."
     },
     {
-      "id": "lift_lower",
+      "id": "exit",
       "at": [
-        23.2,
-        -2.7
-      ],
-      "kind": "lift",
-      "label": "ELEVADOR · CHAMAR / VIAJAR"
-    },
-    {
-      "id": "lift_street",
-      "at": [
-        23.2,
+        32,
         0
       ],
-      "kind": "lift",
-      "label": "ELEVADOR · CHAMAR / VIAJAR"
-    },
-    {
-      "id": "lift_upper",
-      "at": [
-        23.2,
-        2.6
-      ],
-      "kind": "lift",
-      "label": "ELEVADOR · CHAMAR / VIAJAR"
+      "label": "ENTRAR NO LABORATÓRIO",
+      "kind": "exit",
+      "mode": "physical",
+      "requires": {
+        "ruins_gate": true
+      }
     }
   ],
   "objectives": [
     [
-      "recife_awake",
-      "01 / Encontre o terminal antigo à direita."
+      "ruins_contact",
+      "Encontre Nara junto ao Marco Zero."
     ],
     [
-      "recife_scan",
-      "02 / Ative GAIA. Suba e analise o circuito da passarela."
+      "ruins_water",
+      "Reabra a bomba da comunidade."
     ],
     [
-      "recife_cell",
-      "03 / Volte ao físico. Desça e recolha a célula no arquivo."
-    ],
-    [
-      "recife_power",
-      "04 / Leve a célula ao soquete da bomba, na rua."
-    ],
-    [
-      "recife_authorized",
-      "05 / Com GAIA, autorize o painel junto à comporta."
-    ],
-    [
-      "recife_gate",
-      "06 / Volte ao físico e abra a comporta."
-    ],
-    [
-      "recife_departed",
-      "07 / Siga à direita para a Estação Capibaribe."
+      "next",
+      "Entre no laboratório, à direita."
     ]
-  ]
+  ],
+  "opening_puzzle": false
 }
